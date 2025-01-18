@@ -1,0 +1,21 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="AllRightsReserved"
+
+[[mods]]
+    modId="infusedfoods"
+    version="${file.jarVersion}"
+    displayName="InfusedFoods"
+    credits="Apex - Programming"
+    authors="ApexStudios"
+    description="InfusedFoods"
+
+[[dependencies.infusedfoods]]
+    modId="apexcore"
+    type="required"
+    versionRange="[21.4,)"
+
+#[[accessTransformers]]
+#    file="META-INF/accesstransformer.cfg"
+#[[mixins]]
+#    config="META-INF/infusedfoods.mixins.json"
