@@ -19,6 +19,14 @@ pluginManagement {
     }
 }
 
+dependencyResolutionManagement {
+    versionCatalogs.create("libs") {
+        library("apexcore", "dev.apexstudios", "apexcore").version {
+            strictly("[21.4.0,21.5.0)")
+        }
+    }
+}
+
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
