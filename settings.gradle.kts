@@ -30,3 +30,5 @@ if(file("../ApexCore/build.gradle.kts").exists()) {
         }
     }
 }
+
+rootProject.name = "InfusedFoods"
