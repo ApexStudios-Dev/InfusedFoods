@@ -5,7 +5,6 @@ import dev.apexstudios.apexcore.lib.registree.holder.DeferredAttachment;
 import dev.apexstudios.apexcore.lib.registree.holder.DeferredBlock;
 import dev.apexstudios.infusedfoods.InfusedFoods;
 import dev.apexstudios.infusedfoods.fluid.PotionFluidSetup;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.component.DataComponents;
@@ -30,7 +29,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -58,11 +56,6 @@ public interface PotionCauldronSetup {
     static void register(IEventBus modBus) {
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(PotionCauldronSetup::registerInteractions));
         modBus.addListener(RegisterCauldronFluidContentEvent.class, event -> event.register(BLOCK.value(), PotionFluidSetup.FLUID.value(), FluidType.BUCKET_VOLUME, LayeredCauldronBlock.LEVEL));
-
-        modBus.addListener(RegisterColorHandlersEvent.Block.class, event -> event.register((blockState, level, pos, tintIndex) -> {
-            var clientLevel = Minecraft.getInstance().level;
-            return clientLevel == null || pos == null ? PotionContents.BASE_POTION_COLOR : CauldronPotionHandler.get(clientLevel, pos).getColor();
-        }, BLOCK.value()));
 
         NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, event -> {
             if(event.getEntity() instanceof ServerPlayer player)
