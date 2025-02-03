@@ -6,9 +6,11 @@ license="AllRightsReserved"
     modId="infusedfoods"
     version="${file.jarVersion}"
     displayName="InfusedFoods"
-    credits="Apex - Programming"
+    credits="Apex - Programming, Fantasy - Artist"
     authors="ApexStudios"
-    description="InfusedFoods"
+    description="Infused Foods allows players to infuse food items with Potion Effects."
+    logoFile="logo.png"
+    displayURL="https://modrinth.com/mod/infused-foods"
 
 [[dependencies.infusedfoods]]
     modId="apexcore"
