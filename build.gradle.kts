@@ -4,6 +4,7 @@ import me.modmuss50.mpp.ReleaseType
 plugins {
     id("apex-conventions.neoforge")
     id("apex-conventions.immaculate")
+    id("apex-conventions.maven-publishing")
     id("apex-conventions.mod-publishing")
 }
 
