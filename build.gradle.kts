@@ -1,4 +1,5 @@
 import dev.apexstudios.gradle.single.ApexSingleExtension
+import me.modmuss50.mpp.ReleaseType
 
 plugins {
     id("apex-conventions.neoforge")
@@ -22,6 +23,8 @@ dependencies {
 }
 
 publishMods {
+    type = ReleaseType.ALPHA
+
     modrinth {
         projectId = "QinxcGwM"
     }
