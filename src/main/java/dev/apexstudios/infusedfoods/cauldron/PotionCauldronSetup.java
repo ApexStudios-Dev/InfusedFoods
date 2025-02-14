@@ -61,6 +61,11 @@ public interface PotionCauldronSetup {
             if(event.getEntity() instanceof ServerPlayer player)
                 PacketDistributor.sendToPlayer(player, new ClientboundSyncPotionHandler(CauldronPotionHandler.getInstance(player.level())));
         });
+
+        NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerChangedDimensionEvent.class, event -> {
+            if(event.getEntity() instanceof ServerPlayer player)
+                PacketDistributor.sendToPlayer(player, new ClientboundSyncPotionHandler(CauldronPotionHandler.getInstance(player.level())));
+        });
     }
 
     private static void registerInteractions() {
