@@ -1,5 +1,6 @@
 {
   "block.infusedfoods.potion_cauldron": "Potion Cauldron",
+  "fluid_type.infusedfoods.potion": "Potion",
   "item.infusedfoods.potion_bucket": "Potion Bucket",
   "itemGroup.infusedfoods.foods": "Infused Foods",
   "itemGroup.infusedfoods.potion_buckets": "Potion Buckets",

@@ -66,6 +66,7 @@ public final class InfusedFoodsDataEntryPoint {
                             .add(InfusedFoods.POTION_BLACKLIST, "Infusion Blacklist (Potions)")
                             .addItem(PotionFluidSetup.BUCKET, "Potion Bucket")
                             .addBlock(PotionCauldronSetup.BLOCK, "Potion Cauldron")
+                            .add(PotionFluidSetup.FLUID_TYPE.getKey(), "fluid_type", "Potion")
                     )
                     .providing(ProviderTypes.MODELS, (context, provider) -> {
                         provider.knownBlocks(PotionCauldronSetup.BLOCK).knownItems(PotionFluidSetup.BUCKET);
