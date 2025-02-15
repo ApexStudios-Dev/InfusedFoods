@@ -15,4 +15,3 @@ jobs:
             name: "InfusedFoods"
             logo: "https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/new/infused_foods.png"
             color: "8015279" # 7A4DAF
-            github_package_url: "https://maven.pkg.github.com/ApexStudios-Dev/InfusedFoods"
