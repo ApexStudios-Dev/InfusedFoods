@@ -1,3 +1,4 @@
+import dev.apexstudios.gradle.ApexExtension
 import dev.apexstudios.gradle.single.ApexSingleExtension
 import me.modmuss50.mpp.ReleaseType
 
@@ -15,6 +16,10 @@ apex.extendCompilerErrors()
 
 val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
+
+repositories {
+    ApexExtension.withApexStudiosGithubMaven(this, "ApexCore")
+}
 
 dependencies {
     implementation(libs.apexcore)
