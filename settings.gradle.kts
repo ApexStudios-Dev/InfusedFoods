@@ -13,7 +13,7 @@ pluginManagement {
     resolutionStrategy {
         eachPlugin {
             if(requested.id.namespace == "apex-conventions") {
-                useVersion("[0.1,)")
+                useVersion("0.1-SNAPSHOT")
             }
         }
     }
@@ -28,7 +28,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
 }
 
 if(file("../ApexCore/build.gradle.kts").exists()) {
