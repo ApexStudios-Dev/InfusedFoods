@@ -30,6 +30,9 @@ issueTrackerURL="https://github.com/ApexStudios-Dev/Issues/issues"
     modId="apexcore"
     type="required"
     versionRange="[21.4,21.5)"
+    [dependencies.infusedfoods.mc-publish]
+        modrinth="xl3myxch"
+        curseforge="550778"
 
 #[[accessTransformers]]
 #    file="META-INF/accesstransformer.cfg"
