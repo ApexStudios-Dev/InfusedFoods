@@ -10,7 +10,7 @@ jobs:
         secrets: inherit
         with:
             curseforge_id: "629292"
-            # modrinth_id: "QinxcGwM"
+            modrinth_id: "QinxcGwM"
             release_type: "alpha"
             name: "InfusedFoods"
             logo: "https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/new/infused_foods.png"
