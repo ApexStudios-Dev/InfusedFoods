@@ -52,6 +52,8 @@ public final class InfusedFoodsDataEntryPoint {
                             .add(InfusedFoods.POTION_BLACKLIST, "Infusion Blacklist (Potions)")
                             .addBlock(PotionCauldronSetup.BLOCK, "Potion Cauldron")
                             .add(InfusedFoods.POTION_FLUID_TYPE.getKey(), "fluid_type", "Potion")
+                            .add(RecipeSetup.CLEANSING_AGENT, "Cleansing Agents")
+                            .add(RecipeSetup.EFFECTS_HIDER, "Potion Effect Hiders")
                     )
                     .providing(ProviderTypes.MODELS, (context, provider) -> {
                         createPotionCauldron(provider.blockModels());
