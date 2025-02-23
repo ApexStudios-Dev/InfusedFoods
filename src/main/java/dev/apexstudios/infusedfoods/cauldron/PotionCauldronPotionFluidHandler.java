@@ -1,7 +1,7 @@
 package dev.apexstudios.infusedfoods.cauldron;
 
 import dev.apexstudios.apexcore.lib.component.block.types.LayeredCauldronBlockComponent;
-import dev.apexstudios.infusedfoods.fluid.PotionFluidSetup;
+import dev.apexstudios.infusedfoods.InfusedFoods;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.alchemy.PotionContents;
@@ -28,7 +28,7 @@ public final class PotionCauldronPotionFluidHandler implements IFluidHandler {
         var fluidLevel = level.getBlockState(pos).getValue(LayeredCauldronBlockComponent.LEVEL);
         var amount = FluidType.BUCKET_VOLUME * fluidLevel / LayeredCauldronBlockComponent.MAX_FILL_LEVEL;
 
-        var fluid = PotionFluidSetup.FLUID.toStack(amount);
+        var fluid = InfusedFoods.POTION_FLUID.toStack(amount);
         fluid.set(DataComponents.POTION_CONTENTS, content);
         return fluid;
     }

@@ -1,11 +1,13 @@
 package dev.apexstudios.infusedfoods;
 
+import dev.apexstudios.apexcore.lib.fluid.ItemOnlyFluid;
 import dev.apexstudios.apexcore.lib.registree.Registree;
+import dev.apexstudios.apexcore.lib.registree.holder.DeferredFluid;
+import dev.apexstudios.apexcore.lib.registree.holder.DeferredFluidType;
 import dev.apexstudios.apexcore.lib.tooltip.RegisterTooltipEvent;
 import dev.apexstudios.apexcore.lib.tooltip.TooltipPosition;
 import dev.apexstudios.infusedfoods.cauldron.ClientboundSyncPotionHandler;
 import dev.apexstudios.infusedfoods.cauldron.PotionCauldronSetup;
-import dev.apexstudios.infusedfoods.fluid.PotionFluidSetup;
 import dev.apexstudios.infusedfoods.recipe.RecipeSetup;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
@@ -25,8 +27,11 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,14 +59,17 @@ public final class InfusedFoods {
             .withSearchBar()
     );
 
+    public static final DeferredFluidType<FluidType> POTION_FLUID_TYPE = InfusedFoods.REGISTREE.registerSimpleFluidType("potion");
+    public static final DeferredFluid<Fluid> POTION_FLUID = InfusedFoods.REGISTREE.registerFluid("potion", ItemOnlyFluid.simpleFactory(POTION_FLUID_TYPE, Items.POTION));
+
     public InfusedFoods(IEventBus modBus) {
         REGISTREE.registerEvents(modBus);
-        PotionFluidSetup.register(modBus);
         PotionCauldronSetup.register(modBus);
         RecipeSetup.register();
 
         modBus.addListener(RegisterPayloadHandlersEvent.class, event -> event.registrar("1").playToClient(ClientboundSyncPotionHandler.TYPE, ClientboundSyncPotionHandler.STREAM_CODEC, ClientboundSyncPotionHandler::handle));
         modBus.addListener(RegisterTooltipEvent.class, event -> event.registerAfter(TooltipPosition.COMPONENT, this::appendPotionEffects));
+        modBus.addListener(RegisterClientExtensionsEvent.class, event -> event.registerFluidType(new PotionFluidTypeClientExtension(), POTION_FLUID_TYPE.value()));
     }
 
     private void appendPotionEffects(ItemStack stack, Item.TooltipContext context, Consumer<Component> adder, @Nullable Player player, TooltipFlag flag) {

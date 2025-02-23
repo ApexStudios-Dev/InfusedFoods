@@ -4,7 +4,6 @@ import dev.apexstudios.apexcore.lib.component.block.types.LayeredCauldronBlockCo
 import dev.apexstudios.apexcore.lib.registree.holder.DeferredAttachment;
 import dev.apexstudios.apexcore.lib.registree.holder.DeferredBlock;
 import dev.apexstudios.infusedfoods.InfusedFoods;
-import dev.apexstudios.infusedfoods.fluid.PotionFluidSetup;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.component.DataComponents;
@@ -55,7 +54,7 @@ public interface PotionCauldronSetup {
 
     static void register(IEventBus modBus) {
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(PotionCauldronSetup::registerInteractions));
-        modBus.addListener(RegisterCauldronFluidContentEvent.class, event -> event.register(BLOCK.value(), PotionFluidSetup.FLUID.value(), FluidType.BUCKET_VOLUME, LayeredCauldronBlock.LEVEL));
+        modBus.addListener(RegisterCauldronFluidContentEvent.class, event -> event.register(BLOCK.value(), InfusedFoods.POTION_FLUID.value(), FluidType.BUCKET_VOLUME, LayeredCauldronBlock.LEVEL));
 
         NeoForge.EVENT_BUS.addListener(PlayerEvent.PlayerLoggedInEvent.class, event -> {
             if(event.getEntity() instanceof ServerPlayer player)
@@ -79,13 +78,10 @@ public interface PotionCauldronSetup {
                 PotionCauldronSetup::potion2PotionCauldron
         ));
 
-        map.put(PotionFluidSetup.BUCKET.value(), PotionCauldronSetup::bucket2PotionCauldron);
-
         // Potion Cauldron
         map = INTERACTIONS.map();
         map.put(Items.POTION, PotionCauldronSetup::potion2PotionCauldron);
         map.put(Items.GLASS_BOTTLE, PotionCauldronSetup::potionCauldron2Potion);
-        map.put(Items.BUCKET, PotionCauldronSetup::potionCauldron2Bucket);
     }
 
     static InteractionResult waterBottle2WaterCauldron(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
@@ -130,27 +126,6 @@ public interface PotionCauldronSetup {
         return InteractionResult.PASS;
     }
 
-    static InteractionResult bucket2PotionCauldron(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
-        var contents = stack.getOrDefault(DataComponents.POTION_CONTENTS, PotionContents.EMPTY);
-        var potion = contents.potion().orElse(Potions.WATER);
-
-        if(contents.hasEffects() && InfusedFoods.isValidPotion(potion) && !blockState.hasProperty(LayeredCauldronBlockComponent.LEVEL)) {
-            if(!level.isClientSide) {
-                var item = stack.getItem();
-                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
-                player.awardStat(Stats.USE_CAULDRON);
-                player.awardStat(Stats.ITEM_USED.get(item));
-                level.setBlockAndUpdate(pos, BLOCK.value().defaultBlockState().setValue(LayeredCauldronBlockComponent.LEVEL, LayeredCauldronBlockComponent.MAX_FILL_LEVEL));
-                level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1F, 1F);
-                level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
-
-                CauldronPotionHandler.set(level, pos, contents);
-            }
-        }
-
-        return InteractionResult.TRY_WITH_EMPTY_HAND;
-    }
-
     static InteractionResult potionCauldron2Potion(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
         if(!level.isClientSide) {
             var contents = CauldronPotionHandler.get(level, pos);
@@ -169,31 +144,6 @@ public interface PotionCauldronSetup {
         }
 
         return InteractionResult.SUCCESS;
-    }
-
-    static InteractionResult potionCauldron2Bucket(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
-        var fluidLevel = blockState.getValueOrElse(LayeredCauldronBlockComponent.LEVEL, 0);
-
-        if(fluidLevel >= LayeredCauldronBlockComponent.MAX_FILL_LEVEL) {
-            if(!level.isClientSide) {
-                var contents = CauldronPotionHandler.get(level, pos);
-                var filled = PotionFluidSetup.BUCKET.toStack();
-                filled.set(DataComponents.POTION_CONTENTS, contents);
-
-                player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, filled));
-                player.awardStat(Stats.USE_CAULDRON);
-                player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-                level.setBlockAndUpdate(pos, Blocks.CAULDRON.defaultBlockState());
-                level.playSound(null, pos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 1F, 1F);
-                level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
-
-                CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
-            }
-
-            return InteractionResult.SUCCESS;
-        }
-
-        return InteractionResult.TRY_WITH_EMPTY_HAND;
     }
 
     static InteractionResult potionCauldron2Food(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
