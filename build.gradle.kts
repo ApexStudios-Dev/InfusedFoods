@@ -1,11 +1,9 @@
 import dev.apexstudios.gradle.single.ApexSingleExtension
-import me.modmuss50.mpp.ReleaseType
 
 plugins {
     id("apex-conventions.neoforge")
     id("apex-conventions.immaculate")
     id("apex-conventions.maven-publishing")
-    id("apex-conventions.mod-publishing")
 }
 
 group = "dev.apexstudios"
@@ -21,17 +19,4 @@ dependencies {
     accessTransformers(libs.apexcore)
     interfaceInjectionData(libs.apexcore)
     "dataImplementation"(libs.apexcore)
-}
-
-publishMods {
-    type = ReleaseType.ALPHA
-
-//    modrinth {
-//        projectId = "QinxcGwM"
-//    }
-
-    curseforge {
-        projectId = "629292"
-        projectSlug = "infused-foods"
-    }
 }
