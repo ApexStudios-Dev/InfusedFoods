@@ -1,8 +1,4 @@
 pluginManagement {
-    if(file("../ApexGradle/build.gradle.kts").exists()) {
-        includeBuild("../ApexGradle")
-    }
-
     repositories {
         gradlePluginPortal()
         mavenLocal()
@@ -21,22 +17,12 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        library("apexcore", "dev.apexstudios", "apexcore").version {
-            strictly("[21.4.0,21.5.0)")
-        }
+        library("apexcore", "dev.apexstudios", "apexcore").version("21.4.20")
     }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
-}
-
-if(file("../ApexCore/build.gradle.kts").exists()) {
-    includeBuild("../ApexCore") {
-        dependencySubstitution {
-            substitute(module("dev.apexstudios:apexcore")).using(project(":"))
-        }
-    }
 }
 
 rootProject.name = "InfusedFoods"
