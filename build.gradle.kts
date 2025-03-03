@@ -17,6 +17,5 @@ single.withDataGen()
 dependencies {
     implementation(libs.apexcore)
     accessTransformers(libs.apexcore)
-    interfaceInjectionData(libs.apexcore)
     "dataImplementation"(libs.apexcore)
 }
