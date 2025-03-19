@@ -17,7 +17,7 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        library("apexcore", "dev.apexstudios", "apexcore").version("21.5.6-beta-pr-13")
+        library("apexcore", "dev.apexstudios", "apexcore").version("21.4.31-beta-pr-13")
     }
 }
 
