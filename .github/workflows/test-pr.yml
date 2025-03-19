@@ -7,6 +7,8 @@ on:
       - opened
       - ready_for_review
       - reopened
+    branches:
+      - '!**/port'
 
 jobs:
   compile-mod:
@@ -54,7 +56,7 @@ jobs:
       - name: Download Dependencies
         run: wget https://maven.apexstudios.dev/releases/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar
         env:
-          APEXCORE_VERSION: 21.4.20
+          APEXCORE_VERSION: 21.5.0
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -70,4 +72,4 @@ jobs:
     needs: download-dependencies
     if: success()
     with:
-      neoforge_version: 21.4.96-beta
+      neoforge_version: 21.5.0-beta

@@ -8,6 +8,7 @@ import dev.apexstudios.apexcore.lib.component.block.types.LayeredCauldronBlockCo
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -75,11 +76,9 @@ public final class PotionCauldronBlock extends BaseBlockComponentHolder {
     }
 
     @Override
-    public void onRemove(BlockState blockState, Level level, BlockPos pos, BlockState newBlockState, boolean movedByPiston) {
-        if(!blockState.is(newBlockState.getBlock()))
-            CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
-
-        super.onRemove(blockState, level, pos, newBlockState, movedByPiston);
+    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel level, BlockPos pos, boolean movedByPiston) {
+        CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
+        super.affectNeighborsAfterRemoval(blockState, level, pos, movedByPiston);
     }
 
     @Override

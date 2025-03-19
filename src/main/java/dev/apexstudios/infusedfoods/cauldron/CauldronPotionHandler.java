@@ -75,7 +75,7 @@ public final class CauldronPotionHandler {
             var map = new Long2ObjectOpenHashMap<PotionContents>();
             var ops = registries.createSerializationContext(NbtOps.INSTANCE);
 
-            for(var key : tag.getAllKeys()) {
+            for(var key : tag.keySet()) {
                 long pos;
 
                 try {

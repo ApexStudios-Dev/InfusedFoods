@@ -11,8 +11,6 @@ import dev.apexstudios.infusedfoods.recipe.RecipeSetup;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
-import net.minecraft.client.data.models.blockstates.Variant;
-import net.minecraft.client.data.models.blockstates.VariantProperties;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
@@ -71,11 +69,11 @@ public final class InfusedFoodsDataEntryPoint {
 
         blockModels.registerSimpleFlatItemModel(block);
 
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.multiVariant(block)
-                .with(PropertyDispatch.property(LayeredCauldronBlockComponent.LEVEL)
-                        .select(1, Variant.variant().with(VariantProperties.MODEL, createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL1, "_level1", waterStill, blockModels)))
-                        .select(2, Variant.variant().with(VariantProperties.MODEL, createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL2, "_level2", waterStill, blockModels)))
-                        .select(3, Variant.variant().with(VariantProperties.MODEL, createCauldronVariantModel(block, ModelTemplates.CAULDRON_FULL, "_full", waterStill, blockModels)))
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
+                .with(PropertyDispatch.initial(LayeredCauldronBlockComponent.LEVEL)
+                        .select(1, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL1, "_level1", waterStill, blockModels)))
+                        .select(2, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL2, "_level2", waterStill, blockModels)))
+                        .select(3, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_FULL, "_full", waterStill, blockModels)))
                 )
         );
     }
