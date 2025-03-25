@@ -52,9 +52,9 @@ jobs:
           name: production-artifacts
 
       - name: Download Dependencies
-        run: wget https://maven.apexstudios.dev/releases/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar
+        run: wget https://maven.apexstudios.dev/private/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar
         env:
-          APEXCORE_VERSION: 21.5.0
+          APEXCORE_VERSION: 21.4.38-beta-pr-13
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -70,4 +70,5 @@ jobs:
     needs: download-dependencies
     if: success()
     with:
-      neoforge_version: 21.5.0-beta
+      neoforge_version: 21.5.0-alpha.1.21.5-rc1.20250321.225134
+      neoforge_maven: 'https://prmaven.neoforged.net/NeoForge/pr2039'
