@@ -79,7 +79,7 @@ public final class InfusedFoods {
         var potion = stack.get(DataComponents.POTION_CONTENTS);
 
         if(potion != null)
-            potion.addPotionTooltip(adder, 1F, context.tickRate());
+            potion.addToTooltip(context, adder, flag, stack);
     }
 
     public static ResourceLocation identifier(String identifier) {
