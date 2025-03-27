@@ -54,7 +54,7 @@ jobs:
       - name: Download Dependencies
         run: wget https://maven.apexstudios.dev/releases/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar
         env:
-          APEXCORE_VERSION: 21.5.1
+          APEXCORE_VERSION: 21.5.2
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
