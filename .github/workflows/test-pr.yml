@@ -54,7 +54,7 @@ jobs:
       - name: Download Dependencies
         run: wget https://maven.apexstudios.dev/releases/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar
         env:
-          APEXCORE_VERSION: 21.5.2
+          APEXCORE_VERSION: 21.5.3
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -70,4 +70,4 @@ jobs:
     needs: download-dependencies
     if: success()
     with:
-      neoforge_version: 21.5.0-beta
+      neoforge_version: 21.5.34-beta
