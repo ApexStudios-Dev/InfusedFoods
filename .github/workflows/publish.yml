@@ -19,5 +19,5 @@ jobs:
       artifact-id: infusedfoods
       display-name: InfusedFoods
       release-type: release
-      logo-url: 'https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/infusedfoods/logo.png'
+      logo-url: 'https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/infusedfoods/banner.png'
       color: 0x7A4DAF
