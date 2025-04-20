@@ -1,21 +1,29 @@
 name: Publish
 
 on:
+  pull_request:
+    types:
+      - synchronize
+      - opened
+      - ready_for_review
+      - reopened
   workflow_dispatch:
   push:
-    branches: [ "**/main" ]
-    paths: [ "**/src/**" ]
+    branches: [ '**/main' ]
+    paths: [ '**/src/**' ]
 
 jobs:
-  publish:
-    name: Publish InfusedFoods
-    uses: ApexStudios-Dev/.github/.github/workflows/publish-mod.yml@master
+  publish-mod:
+    uses: ApexStudios-Dev/.github/.github/workflows/_publish-mod.yml@master
     secrets: inherit
     with:
-      display_name: InfusedFoods
-      logo_url: https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/new/infused_foods.png
+      java-version: 21
+      java-vendor: temurin
+      publish-task: ':publishReleasePublicationToApexStudios-ReleasesRepository'
+      curseforge-id: '835372' # '629292'
+      modrinth-id: 'EjjiYArZ' # 'QinxcGwM'
+      artifact-id: infusedfoods
+      display-name: InfusedFoods
+      release-type: release
+      logo-url: 'https://raw.githubusercontent.com/ApexStudios-Dev/.github/refs/heads/master/assets/minecraft/infusedfoods/logo.png'
       color: 0x7A4DAF
-      release_type: release
-      artifact_id: infusedfoods
-      curseforge_id: "629292"
-      modrinth_id: QinxcGwM
