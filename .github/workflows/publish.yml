@@ -1,12 +1,6 @@
 name: Publish
 
 on:
-  pull_request:
-    types:
-      - synchronize
-      - opened
-      - ready_for_review
-      - reopened
   workflow_dispatch:
   push:
     branches: [ '**/main' ]
@@ -20,8 +14,8 @@ jobs:
       java-version: 21
       java-vendor: temurin
       publish-task: ':publishReleasePublicationToApexStudios-ReleasesRepository'
-      curseforge-id: '835372' # '629292'
-      modrinth-id: 'EjjiYArZ' # 'QinxcGwM'
+      curseforge-id: '629292'
+      modrinth-id: 'QinxcGwM'
       artifact-id: infusedfoods
       display-name: InfusedFoods
       release-type: release
