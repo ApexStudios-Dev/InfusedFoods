@@ -35,8 +35,11 @@ public final class InfusedFoodsDataEntryPoint {
                             .tag(InfusedFoods.POTION_BLACKLIST).withElement(Potions.MUNDANE)
                     )
                     .providing(ProviderTypes.ITEM_TAGS, (context, provider) -> {
-                        provider.tag(RecipeSetup.CLEANSING_AGENT).withTag(Tags.Items.BUCKETS_MILK);
-                        provider.tag(RecipeSetup.EFFECTS_HIDER).withElement(Items.SPIDER_EYE);
+                        provider.tag(RecipeSetup.CLEANSING_AGENT)
+                                .withTag(Tags.Items.BUCKETS_MILK)
+                                .withTag(Tags.Items.DRINKS_MILK);
+
+                        provider.tag(RecipeSetup.EFFECTS_HIDER).withElement(Items.FERMENTED_SPIDER_EYE);
                     })
                     .providing(ProviderTypes.BLOCK_TAGS, (context, provider) -> {
                         provider.tag(BlockTags.CAULDRONS).withElement(PotionCauldronSetup.BLOCK);
