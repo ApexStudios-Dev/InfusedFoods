@@ -21,4 +21,3 @@ jobs:
           mod-id: infusedfoods
           mod-version: ${{ needs.generate-vars.outputs.version }}
           mod-src-dir: src
-          github-token: ${{ secrets.GITHUB_TOKEN }}
