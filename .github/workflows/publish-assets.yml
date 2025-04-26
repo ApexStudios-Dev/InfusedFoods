@@ -3,6 +3,9 @@ name: Publish Assets
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   generate-vars:
     name: Generate Vars
