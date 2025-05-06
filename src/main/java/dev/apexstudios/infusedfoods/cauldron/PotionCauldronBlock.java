@@ -1,38 +1,45 @@
 package dev.apexstudios.infusedfoods.cauldron;
 
+import dev.apexstudios.infusedfoods.util.InfusionEntries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
 
-public final class PotionCauldronBlock extends LayeredCauldronBlock {
-    PotionCauldronBlock(Properties properties) {
-        super(Biome.Precipitation.RAIN, PotionCauldronSetup.INTERACTIONS, properties);
+public final class PotionCauldronBlock extends LayeredCauldronBlock implements EntityBlock {
+    public PotionCauldronBlock(Properties properties) {
+        super(Biome.Precipitation.RAIN, PotionCauldronInteractions.INTERACTIONS, properties);
     }
 
     @Override
-    public void onPlace(BlockState blockState, Level level, BlockPos pos, BlockState oldBlockState, boolean movedByPiston) {
-        if(!blockState.is(oldBlockState.getBlock()))
-            CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
+    protected InteractionResult useItemOn(ItemStack stack, BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult result) {
+        var interactionResult = PotionCauldronInteractions.potionCauldron2Food(blockState, level, pos, player, hand, stack);
 
-        super.onPlace(blockState, level, pos, oldBlockState, movedByPiston);
-    }
+        if(interactionResult.consumesAction())
+            return interactionResult;
 
-    @Override
-    public void affectNeighborsAfterRemoval(BlockState blockState, ServerLevel level, BlockPos pos, boolean movedByPiston) {
-        CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
-        super.affectNeighborsAfterRemoval(blockState, level, pos, movedByPiston);
+        return super.useItemOn(stack, blockState, level, pos, player, hand, result);
     }
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
-        var potionContent = CauldronPotionHandler.get(level, pos);
+        var blockEntity = InfusionEntries.CAULDRON_BLOCK_ENTITY.get(level, pos);
+
+        if(blockEntity == null)
+            return;
+
+        var potionContent = blockEntity.getPotionContents();
         var fluidLevel = blockState.getValue(LEVEL);
         var particle = ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, potionContent.getColor());
 
@@ -52,5 +59,10 @@ public final class PotionCauldronBlock extends LayeredCauldronBlock {
             else
                 level.addParticle(particle, x, y, z - .25D, 0D, 0D, 0D);
         }
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+        return new PotionCauldronBlockEntity(pos, blockState);
     }
 }

@@ -2,7 +2,9 @@ package dev.apexstudios.infusedfoods.recipe;
 
 import com.mojang.serialization.MapCodec;
 import dev.apexstudios.apexcore.lib.registree.type.SimpleRecipeSerializer;
-import dev.apexstudios.infusedfoods.InfusedFoods;
+import dev.apexstudios.infusedfoods.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.util.InfusionTags;
+import dev.apexstudios.infusedfoods.util.InfusionUtil;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -30,12 +32,12 @@ public final class CleansingRecipe extends CustomRecipe {
         var food = ItemStack.EMPTY;
 
         for(var stack : input.items()) {
-            if(stack.is(RecipeSetup.CLEANSING_AGENT)) {
+            if(stack.is(InfusionTags.CLEANSING_AGENT)) {
                 if(!cleansingAgent.isEmpty())
                     return false;
 
                 cleansingAgent = stack;
-            } else if(InfusedFoods.isValidFood(stack) && stack.has(DataComponents.POTION_CONTENTS)) {
+            } else if(InfusionUtil.isValidFood(stack) && stack.has(DataComponents.POTION_CONTENTS)) {
                 if(!food.isEmpty())
                     return false;
 
@@ -52,12 +54,12 @@ public final class CleansingRecipe extends CustomRecipe {
         var food = ItemStack.EMPTY;
 
         for(var stack : input.items()) {
-            if(stack.is(RecipeSetup.CLEANSING_AGENT)) {
+            if(stack.is(InfusionTags.CLEANSING_AGENT)) {
                 if(!cleansingAgent.isEmpty())
                     return ItemStack.EMPTY;
 
                 cleansingAgent = stack;
-            } else if(InfusedFoods.isValidFood(stack) && stack.has(DataComponents.POTION_CONTENTS)) {
+            } else if(InfusionUtil.isValidFood(stack) && stack.has(DataComponents.POTION_CONTENTS)) {
                 if(!food.isEmpty())
                     return ItemStack.EMPTY;
 
@@ -67,12 +69,12 @@ public final class CleansingRecipe extends CustomRecipe {
 
         var result = food.copyWithCount(1);
         result.remove(DataComponents.POTION_CONTENTS);
-        result.remove(RecipeSetup.HIDE_EFFECTS_COMPONENT);
+        result.remove(InfusionEntries.HIDE_EFFECTS_COMPONENT);
         return result;
     }
 
     @Override
     public RecipeSerializer<? extends CustomRecipe> getSerializer() {
-        return RecipeSetup.CLEANSING.value();
+        return InfusionEntries.CLEANSING_RECIPE.value();
     }
 }
