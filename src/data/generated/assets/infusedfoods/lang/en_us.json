@@ -1,9 +1,7 @@
 {
   "block.infusedfoods.potion_cauldron": "Potion Cauldron",
   "fluid_type.infusedfoods.potion": "Potion",
-  "itemGroup.infusedfoods.foods": "Infused Foods",
   "tag.item.infusedfoods.cleansing_agent": "Cleansing Agents",
-  "tag.item.infusedfoods.effects_hider": "Potion Effect Hiders",
   "tag.item.infusedfoods.infusion_blacklist": "Infusion Blacklist (Items)",
   "tag.potion.infusedfoods.infusion_blacklist": "Infusion Blacklist (Potions)"
 }
