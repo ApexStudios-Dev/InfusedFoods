@@ -1,6 +1,5 @@
 package dev.apexstudios.infusedfoods.data;
 
-import dev.apexstudios.apexcore.lib.component.block.types.LayeredCauldronBlockComponent;
 import dev.apexstudios.apexcore.lib.data.ProviderTypes;
 import dev.apexstudios.apexcore.lib.data.ResourceGenerator;
 import dev.apexstudios.infusedfoods.InfusedFoods;
@@ -21,6 +20,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -73,7 +73,7 @@ public final class InfusedFoodsDataEntryPoint {
         blockModels.registerSimpleFlatItemModel(block);
 
         blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(block)
-                .with(PropertyDispatch.initial(LayeredCauldronBlockComponent.LEVEL)
+                .with(PropertyDispatch.initial(LayeredCauldronBlock.LEVEL)
                         .select(1, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL1, "_level1", waterStill, blockModels)))
                         .select(2, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_LEVEL2, "_level2", waterStill, blockModels)))
                         .select(3, BlockModelGenerators.plainVariant(createCauldronVariantModel(block, ModelTemplates.CAULDRON_FULL, "_full", waterStill, blockModels)))

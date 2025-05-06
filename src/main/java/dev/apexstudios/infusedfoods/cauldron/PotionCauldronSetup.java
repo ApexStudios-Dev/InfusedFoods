@@ -1,6 +1,5 @@
 package dev.apexstudios.infusedfoods.cauldron;
 
-import dev.apexstudios.apexcore.lib.component.block.types.LayeredCauldronBlockComponent;
 import dev.apexstudios.apexcore.lib.registree.holder.DeferredAttachment;
 import dev.apexstudios.apexcore.lib.registree.holder.DeferredBlock;
 import dev.apexstudios.infusedfoods.InfusedFoods;
@@ -108,14 +107,14 @@ public interface PotionCauldronSetup {
         var hasPotion = contents != PotionContents.EMPTY && contents.hasEffects();
         var potion = contents.potion().orElse(Potions.WATER);
         var isValidPotion = current == PotionContents.EMPTY || current.is(potion) || InfusedFoods.isValidPotion(potion);
-        var fluidLevel = blockState.getValueOrElse(LayeredCauldronBlockComponent.LEVEL, 0);
+        var fluidLevel = blockState.getValueOrElse(LayeredCauldronBlock.LEVEL, 0);
 
-        if(hasPotion && fluidLevel < LayeredCauldronBlockComponent.MAX_FILL_LEVEL && isValidPotion) {
+        if(hasPotion && fluidLevel < LayeredCauldronBlock.MAX_FILL_LEVEL && isValidPotion) {
             if(!level.isClientSide) {
                 player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
                 player.awardStat(Stats.USE_CAULDRON);
                 player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
-                level.setBlockAndUpdate(pos, blockState.hasProperty(LayeredCauldronBlockComponent.LEVEL) ? blockState.setValue(LayeredCauldronBlockComponent.LEVEL, fluidLevel + 1) : BLOCK.value().defaultBlockState());
+                level.setBlockAndUpdate(pos, blockState.hasProperty(LayeredCauldronBlock.LEVEL) ? blockState.setValue(LayeredCauldronBlock.LEVEL, fluidLevel + 1) : BLOCK.value().defaultBlockState());
                 level.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1F);
                 level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
 
@@ -139,7 +138,7 @@ public interface PotionCauldronSetup {
             level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1F, 1F);
             level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
 
-            if(blockState.getValue(LayeredCauldronBlockComponent.LEVEL) <= LayeredCauldronBlockComponent.MIN_FILL_LEVEL)
+            if(blockState.getValue(LayeredCauldronBlock.LEVEL) <= LayeredCauldronBlock.MIN_FILL_LEVEL)
                 CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
         }
 
@@ -163,7 +162,7 @@ public interface PotionCauldronSetup {
                 // level.playSound(null, pos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1F, 1F);
                 // level.gameEvent(null, GameEvent.FLUID_PICKUP, pos);
 
-                if(blockState.getValue(LayeredCauldronBlockComponent.LEVEL) <= LayeredCauldronBlockComponent.MIN_FILL_LEVEL)
+                if(blockState.getValue(LayeredCauldronBlock.LEVEL) <= LayeredCauldronBlock.MIN_FILL_LEVEL)
                     CauldronPotionHandler.set(level, pos, PotionContents.EMPTY);
             }
 
