@@ -7,13 +7,14 @@ import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 public final class PotionCauldronBlockEntity extends BlockEntity {
     private static final String TAG_POTION = "PotionContents";
@@ -34,15 +35,15 @@ public final class PotionCauldronBlockEntity extends BlockEntity {
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        tag.store(TAG_POTION, PotionContents.CODEC, registries.createSerializationContext(NbtOps.INSTANCE), potionContents);
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.storeNullable(TAG_POTION, PotionContents.CODEC, potionContents);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
-        potionContents = tag.read(TAG_POTION, PotionContents.CODEC, registries.createSerializationContext(NbtOps.INSTANCE)).orElse(PotionContents.EMPTY);
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        potionContents = input.read(TAG_POTION, PotionContents.CODEC).orElse(PotionContents.EMPTY);
     }
 
     @Override
@@ -58,9 +59,9 @@ public final class PotionCauldronBlockEntity extends BlockEntity {
     }
 
     @Override
-    public void removeComponentsFromTag(CompoundTag tag) {
-        super.removeComponentsFromTag(tag);
-        tag.remove(TAG_POTION);
+    public void removeComponentsFromTag(ValueOutput output) {
+        super.removeComponentsFromTag(output);
+        output.discard(TAG_POTION);
     }
 
     @Override
@@ -71,10 +72,5 @@ public final class PotionCauldronBlockEntity extends BlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         return saveWithoutMetadata(registries);
-    }
-
-    @Override
-    public void handleUpdateTag(CompoundTag tag, HolderLookup.Provider registries) {
-        super.handleUpdateTag(tag, registries);
     }
 }
