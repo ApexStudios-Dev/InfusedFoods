@@ -14,10 +14,6 @@ apex.extendCompilerErrors()
 val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
 
-repositories {
-    maven("https://maven.apexstudios.dev/private")
-}
-
 dependencies {
     implementation(libs.apexcore)
     accessTransformers(libs.apexcore)
