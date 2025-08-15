@@ -29,7 +29,7 @@ issueTrackerURL="https://github.com/ApexStudios-Dev/Issues/issues"
 [[dependencies.infusedfoods]]
     modId="apexcore"
     type="required"
-    versionRange="[21.8,21.9)"
+    versionRange="[21.8-beta,21.9)"
     [dependencies.infusedfoods.mc-publish]
         modrinth="xl3myxch"
         curseforge="550778"
