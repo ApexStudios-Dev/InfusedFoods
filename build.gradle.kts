@@ -7,15 +7,11 @@ plugins {
 
 group = "dev.apexstudios"
 
-apex.neoVersion("21.9.0-alpha.1.21.9-pre3.20250922.230603", "1.21.8", "2025.07.20")
+apex.neoVersion("21.9.0-beta", "1.21.8", "2025.09.14")
 apex.extendCompilerErrors()
 
 val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
-
-repositories {
-    apex.neoPrMaven(this, 2639)
-}
 
 dependencies {
     implementation(libs.apexcore)

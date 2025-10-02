@@ -58,12 +58,12 @@ jobs:
           wget -O "mods/apexcore-$APEXCORE_VERSION.jar" "https://maven.apexstudios.dev/private/dev/apexstudios/apexcore/$APEXCORE_VERSION/apexcore-$APEXCORE_VERSION.jar"
           wget -O "mods/infusedfoods-${{ needs.generate-vars.outputs.version }}.jar" "https://maven.apexstudios.dev/private/dev/apexstudios/infusedfoods/${{ needs.generate-vars.outputs.version }}/infusedfoods-${{ needs.generate-vars.outputs.version }}.jar"
         env:
-          APEXCORE_VERSION: 21.9.9-beta-pr-51
+          APEXCORE_VERSION: 21.9.11-beta-pr-51
 
       - name: Test Production Server
         uses: ApexStudios-Dev/.github/actions/test-production-server@master
         with:
           java-version: 21
           java-vendor: temurin
-          neoforge-version: 21.9.0-alpha.1.21.9-pre3.20250922.230603
-          neoforge-maven: 'https://prmaven.neoforged.net/NeoForge/pr2639'
+          neoforge-version: 21.9.0-beta
+          # neoforge-maven: 'https://prmaven.neoforged.net/NeoForge/pr2639'
