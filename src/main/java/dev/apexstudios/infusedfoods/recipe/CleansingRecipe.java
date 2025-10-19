@@ -1,10 +1,10 @@
 package dev.apexstudios.infusedfoods.recipe;
 
 import com.mojang.serialization.MapCodec;
-import dev.apexstudios.apexcore.lib.registree.type.SimpleRecipeSerializer;
 import dev.apexstudios.infusedfoods.util.InfusionEntries;
 import dev.apexstudios.infusedfoods.util.InfusionTags;
 import dev.apexstudios.infusedfoods.util.InfusionUtil;
+import dev.apexstudios.registree.impl.type.SimpleRecipeSerializer;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;

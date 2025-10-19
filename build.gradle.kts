@@ -14,6 +14,9 @@ val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
 
 dependencies {
+    implementation(libs.registree)
+    "dataImplementation"(libs.registree)
+
     implementation(libs.apexcore)
     accessTransformers(libs.apexcore)
     "dataImplementation"(libs.apexcore)
