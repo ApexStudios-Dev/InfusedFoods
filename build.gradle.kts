@@ -1,8 +1,8 @@
 import dev.apexstudios.gradle.single.ApexSingleExtension
 
 plugins {
-    id("apex-conventions.neoforge") version "0.1.74"
-    id("apex-conventions.maven-publishing") version "0.1.74"
+    id("apex-conventions.neoforge") version "0.1.75"
+    id("apex-conventions.maven-publishing") version "0.1.75"
 }
 
 group = "dev.apexstudios"
@@ -14,6 +14,9 @@ val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
 
 dependencies {
+    implementation(libs.registree)
+    "dataImplementation"(libs.registree)
+
     implementation(libs.apexcore)
     accessTransformers(libs.apexcore)
     "dataImplementation"(libs.apexcore)
