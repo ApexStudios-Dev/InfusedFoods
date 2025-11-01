@@ -22,14 +22,14 @@ side = "BOTH"
 [[dependencies.infusedfoods]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.10-beta,21.11)"
+versionRange = "[21.30-beta,21.11)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.infusedfoods]]
 modId = "apexcore"
 type = "required"
-versionRange = "[21.10-beta,21.11)"
+versionRange = "[21.10,21.11)"
 [dependencies.infusedfoods.mc-publish]
 modrinth = "xl3myxch"
 curseforge = "550778"
