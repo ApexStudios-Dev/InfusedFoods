@@ -14,6 +14,9 @@ val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
 
 repositories {
+    maven("https://maven.apexstudios.dev/prs/Registree/pr10")
+    maven("https://maven.apexstudios.dev/prs/ApexCore/pr64")
+
     apex.neoPrMaven(this, 2815)
 }
 
