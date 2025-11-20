@@ -1,3 +1,4 @@
+import dev.apexstudios.gradle.ApexExtension
 import dev.apexstudios.gradle.single.ApexSingleExtension
 
 plugins {
@@ -12,6 +13,10 @@ apex.extendCompilerErrors()
 
 val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
+
+neoForge {
+    accessTransformers.from(file("src/${ApexExtension.DATA_NAME}/datagen-at.cfg"))
+}
 
 repositories {
     maven("https://maven.apexstudios.dev/prs/Registree/pr10")
