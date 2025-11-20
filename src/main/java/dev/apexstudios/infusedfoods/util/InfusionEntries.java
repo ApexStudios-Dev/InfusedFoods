@@ -1,6 +1,5 @@
 package dev.apexstudios.infusedfoods.util;
 
-import com.mojang.serialization.Codec;
 import dev.apexstudios.apexcore.lib.fluid.ItemOnlyFluid;
 import dev.apexstudios.infusedfoods.InfusedFoods;
 import dev.apexstudios.infusedfoods.cauldron.PotionCauldronBlock;
@@ -22,7 +21,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 public interface InfusionEntries {
     DeferredRecipeSerializer<CleansingRecipe> CLEANSING_RECIPE = InfusedFoods.REGISTREE.registerRecipeSerializer("cleansing", CleansingRecipe.CODEC, CleansingRecipe.STREAM_CODEC);
-    DeferredDataComponent<Unit> HIDE_EFFECTS_COMPONENT = InfusedFoods.REGISTREE.registerDataComponent("hide_effects", Codec.unit(Unit.INSTANCE), StreamCodec.unit(Unit.INSTANCE));
+    DeferredDataComponent<Unit> HIDE_EFFECTS_COMPONENT = InfusedFoods.REGISTREE.registerDataComponent("hide_effects", Unit.CODEC, StreamCodec.unit(Unit.INSTANCE));
 
     DeferredFluidType<FluidType> POTION_FLUID_TYPE = InfusedFoods.REGISTREE.registerSimpleFluidType("potion");
     DeferredFluid<Fluid> POTION_FLUID = InfusedFoods.REGISTREE.registerFluid("potion", ItemOnlyFluid.simpleFactory(POTION_FLUID_TYPE, Items.POTION));
