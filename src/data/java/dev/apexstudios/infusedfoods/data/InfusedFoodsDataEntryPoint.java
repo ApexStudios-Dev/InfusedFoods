@@ -13,7 +13,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.Block;
@@ -72,7 +72,7 @@ public final class InfusedFoodsDataEntryPoint {
         );
     }
 
-    private ResourceLocation createCauldronVariantModel(Block block, ModelTemplate template, String suffix, ResourceLocation fluidTexture, BlockModelGenerators blockModels) {
+    private Identifier createCauldronVariantModel(Block block, ModelTemplate template, String suffix, Identifier fluidTexture, BlockModelGenerators blockModels) {
         return template.createWithSuffix(
                 block,
                 suffix,

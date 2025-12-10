@@ -3,7 +3,7 @@ package dev.apexstudios.infusedfoods;
 import dev.apexstudios.infusedfoods.cauldron.PotionCauldronBlockEntity;
 import dev.apexstudios.infusedfoods.util.InfusionEntries;
 import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -32,18 +32,18 @@ public final class InfusedFoodsClient {
             }
 
             @Override
-            public ResourceLocation getFlowingTexture() {
+            public Identifier getFlowingTexture() {
                 return IClientFluidTypeExtensions.of(NeoForgeMod.WATER_TYPE.value()).getFlowingTexture();
             }
 
             @Override
-            public ResourceLocation getStillTexture() {
+            public Identifier getStillTexture() {
                 return IClientFluidTypeExtensions.of(NeoForgeMod.WATER_TYPE.value()).getStillTexture();
             }
 
             @Nullable
             @Override
-            public ResourceLocation getOverlayTexture() {
+            public Identifier getOverlayTexture() {
                 return IClientFluidTypeExtensions.of(NeoForgeMod.WATER_TYPE.value()).getOverlayTexture();
             }
         }, InfusionEntries.POTION_FLUID_TYPE.value()));
