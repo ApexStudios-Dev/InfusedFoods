@@ -7,8 +7,8 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        library("registree", "dev.apexstudios", "registree").version("21.11.0-beta-pr-11") // match version ApexCore is compiled against
-        library("apexcore", "dev.apexstudios", "apexcore").version("21.11.1-beta-pr-67")
+        library("registree", "dev.apexstudios", "registree").version("21.11.0") // match version ApexCore is compiled against
+        library("apexcore", "dev.apexstudios", "apexcore").version("21.11.0")
     }
 }
 

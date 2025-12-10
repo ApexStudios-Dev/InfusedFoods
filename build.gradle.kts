@@ -13,12 +13,6 @@ apex.extendCompilerErrors()
 val single = ApexSingleExtension.getOrCreate(project)
 single.withDataGen()
 
-repositories {
-    maven("https://maven.apexstudios.dev/prs/Registree/pr11")
-    maven("https://maven.apexstudios.dev/prs/Placement-Visualizer/pr14")
-    maven("https://maven.apexstudios.dev/prs/ApexCore-Private/pr67")
-}
-
 dependencies {
     implementation(libs.registree)
     "dataImplementation"(libs.registree)
