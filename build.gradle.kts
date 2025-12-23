@@ -20,6 +20,12 @@ repositories {
         }
     }
 
+    maven("https://maven.apexstudios.dev/prs/Placement-Visualizer/pr19") {
+        content {
+            includeModule("dev.apexstudios", "placementvisualizer")
+        }
+    }
+
     maven("https://maven.apexstudios.dev/prs/ApexCore-Private/pr70") {
         content {
             includeModule("dev.apexstudios", "apexcore")
