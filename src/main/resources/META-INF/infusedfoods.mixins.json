@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "package": "dev.apexstudios.infusedfoods.mixin",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "CauldronInterationDispatcherAccessor"
+  ],
+  "client": [],
+  "server": [],
+  "minVersion": "0.8"
+}

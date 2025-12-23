@@ -1,4 +1,4 @@
-name: Check Local Changes
+name: Check Formatting
 
 on:
   pull_request:
@@ -7,9 +7,9 @@ on:
       - opened
 
 jobs:
-  check-local-changes:
-    name: Check Local Changes
-    uses: ApexStudios-Dev/.github/.github/workflows/_check-local-changes.yml@master
+  check-formatting:
+    name: Check Formatting
+    uses: ApexStudios-Dev/.github/.github/workflows/_check-formatting.yml@master
     secrets: inherit
     with:
       java-version: 25

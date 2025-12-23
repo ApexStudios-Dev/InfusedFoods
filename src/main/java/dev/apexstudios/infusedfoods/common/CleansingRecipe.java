@@ -1,16 +1,13 @@
-package dev.apexstudios.infusedfoods.recipe;
+package dev.apexstudios.infusedfoods.common;
 
 import com.mojang.serialization.MapCodec;
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
-import dev.apexstudios.infusedfoods.util.InfusionTags;
-import dev.apexstudios.infusedfoods.util.InfusionUtil;
-import dev.apexstudios.registree.impl.type.SimpleRecipeSerializer;
-import net.minecraft.core.HolderLookup;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.util.InfusionTags;
+import dev.apexstudios.infusedfoods.common.util.InfusionUtil;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -18,12 +15,13 @@ import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.ApiStatus;
 
 public final class CleansingRecipe extends CustomRecipe {
-    public static final MapCodec<CleansingRecipe> CODEC = SimpleRecipeSerializer.codec(CleansingRecipe::new, CustomRecipe::category);
-    public static final StreamCodec<RegistryFriendlyByteBuf, CleansingRecipe> STREAM_CODEC = SimpleRecipeSerializer.steamCodec(CleansingRecipe::new, CustomRecipe::category);
+    public static final CleansingRecipe INSTANCE = new CleansingRecipe();
+    public static final MapCodec<CleansingRecipe> CODEC = MapCodec.unit(INSTANCE);
+    public static final StreamCodec<RegistryFriendlyByteBuf, CleansingRecipe> STREAM_CODEC = StreamCodec.unit(INSTANCE);
 
     @ApiStatus.Internal
-    public CleansingRecipe(CraftingBookCategory category) {
-        super(category);
+    private CleansingRecipe() {
+
     }
 
     @Override
@@ -49,7 +47,7 @@ public final class CleansingRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(CraftingInput input) {
         var cleansingAgent = ItemStack.EMPTY;
         var food = ItemStack.EMPTY;
 

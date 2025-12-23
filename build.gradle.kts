@@ -1,23 +1,29 @@
-import dev.apexstudios.gradle.single.ApexSingleExtension
-
 plugins {
-    id("apex-conventions.neoforge") version "0.1.85"
-    id("apex-conventions.maven-publishing") version "0.1.85"
+    id("apex-conventions.neoforge")
+    id("apex-conventions.neoforge-datagen")
+    id("apex-conventions.maven-publishing")
+    id("apex-conventions.jspecify")
 }
 
 group = "dev.apexstudios"
+neoForge.version = libs.versions.neoforge.get()
 
-apex.neoVersion("21.11.0-beta", "1.21.10", "2025.10.12")
-apex.extendCompilerErrors()
+repositories {
+    maven("https://maven.apexmodder.com/prs/Registree/pr17") {
+        content {
+            includeModule("dev.apexstudios", "registree")
+        }
+    }
 
-val single = ApexSingleExtension.getOrCreate(project)
-single.withDataGen()
+    maven("https://maven.apexmodder.com/prs/ApexCore-Private/pr70") {
+        content {
+            includeModule("dev.apexstudios", "apexcore")
+        }
+    }
+}
 
 dependencies {
-    implementation(libs.registree)
-    "dataImplementation"(libs.registree)
-
-    implementation(libs.apexcore)
+    implementation(libs.bundles.apexcore)
+    "dataImplementation"(libs.bundles.apexcore)
     accessTransformers(libs.apexcore)
-    "dataImplementation"(libs.apexcore)
 }

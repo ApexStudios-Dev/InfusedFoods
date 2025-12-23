@@ -1,17 +1,18 @@
 package dev.apexstudios.infusedfoods.data;
 
-import dev.apexstudios.apexcore.lib.data.ProviderTypes;
-import dev.apexstudios.apexcore.lib.data.ResourceGenerator;
-import dev.apexstudios.infusedfoods.InfusedFoods;
-import dev.apexstudios.infusedfoods.recipe.CleansingRecipe;
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
-import dev.apexstudios.infusedfoods.util.InfusionTags;
+import dev.apexstudios.apexcore.api.data.ProviderTypes;
+import dev.apexstudios.apexcore.api.data.ResourceGenerator;
+import dev.apexstudios.infusedfoods.common.CleansingRecipe;
+import dev.apexstudios.infusedfoods.common.InfusedFoods;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.util.InfusionTags;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -52,7 +53,7 @@ public final class InfusedFoodsDataEntryPoint {
                 )
                 .providing(ProviderTypes.MODELS, (context, provider) -> createPotionCauldron(provider.blockModels()))
                 .providing(ProviderTypes.RECIPES, (context, provider) -> SpecialRecipeBuilder
-                        .special(CleansingRecipe::new)
+                        .special(() -> CleansingRecipe.INSTANCE)
                         .save(provider.output(), InfusedFoods.id("cleansing"))
                 ));
     }
@@ -72,7 +73,7 @@ public final class InfusedFoodsDataEntryPoint {
         );
     }
 
-    private Identifier createCauldronVariantModel(Block block, ModelTemplate template, String suffix, Identifier fluidTexture, BlockModelGenerators blockModels) {
+    private Identifier createCauldronVariantModel(Block block, ModelTemplate template, String suffix, Material fluidTexture, BlockModelGenerators blockModels) {
         return template.createWithSuffix(
                 block,
                 suffix,
