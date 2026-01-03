@@ -1,7 +1,8 @@
-package dev.apexstudios.infusedfoods;
+package dev.apexstudios.infusedfoods.client;
 
-import dev.apexstudios.infusedfoods.cauldron.PotionCauldronBlockEntity;
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.InfusedFoods;
+import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlockEntity;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.alchemy.PotionContents;

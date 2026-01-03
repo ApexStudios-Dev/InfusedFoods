@@ -1,4 +1,4 @@
-package dev.apexstudios.infusedfoods.util;
+package dev.apexstudios.infusedfoods.common.util;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;

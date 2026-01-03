@@ -1,11 +1,11 @@
 package dev.apexstudios.infusedfoods.data;
 
-import dev.apexstudios.apexcore.lib.data.ProviderTypes;
-import dev.apexstudios.apexcore.lib.data.ResourceGenerator;
-import dev.apexstudios.infusedfoods.InfusedFoods;
-import dev.apexstudios.infusedfoods.recipe.CleansingRecipe;
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
-import dev.apexstudios.infusedfoods.util.InfusionTags;
+import dev.apexstudios.apexcore.api.data.ProviderTypes;
+import dev.apexstudios.apexcore.api.data.ResourceGenerator;
+import dev.apexstudios.infusedfoods.common.CleansingRecipe;
+import dev.apexstudios.infusedfoods.common.InfusedFoods;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.util.InfusionTags;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.blockstates.PropertyDispatch;

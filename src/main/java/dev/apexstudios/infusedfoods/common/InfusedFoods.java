@@ -1,7 +1,7 @@
-package dev.apexstudios.infusedfoods;
+package dev.apexstudios.infusedfoods.common;
 
-import dev.apexstudios.infusedfoods.cauldron.PotionCauldronInteractions;
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronInteractions;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import dev.apexstudios.registree.api.Registree;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.LayeredCauldronBlock;

@@ -1,6 +1,6 @@
-package dev.apexstudios.infusedfoods.util;
+package dev.apexstudios.infusedfoods.common.util;
 
-import dev.apexstudios.infusedfoods.InfusedFoods;
+import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;

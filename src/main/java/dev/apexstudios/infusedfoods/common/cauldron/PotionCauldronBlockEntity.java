@@ -1,6 +1,6 @@
-package dev.apexstudios.infusedfoods.cauldron;
+package dev.apexstudios.infusedfoods.common.cauldron;
 
-import dev.apexstudios.infusedfoods.util.InfusionEntries;
+import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentGetter;

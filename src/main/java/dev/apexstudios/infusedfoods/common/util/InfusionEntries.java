@@ -1,10 +1,10 @@
-package dev.apexstudios.infusedfoods.util;
+package dev.apexstudios.infusedfoods.common.util;
 
-import dev.apexstudios.apexcore.lib.fluid.ItemOnlyFluid;
-import dev.apexstudios.infusedfoods.InfusedFoods;
-import dev.apexstudios.infusedfoods.cauldron.PotionCauldronBlock;
-import dev.apexstudios.infusedfoods.cauldron.PotionCauldronBlockEntity;
-import dev.apexstudios.infusedfoods.recipe.CleansingRecipe;
+import dev.apexstudios.apexcore.api.ItemOnlyFluid;
+import dev.apexstudios.infusedfoods.common.CleansingRecipe;
+import dev.apexstudios.infusedfoods.common.InfusedFoods;
+import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlock;
+import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlockEntity;
 import dev.apexstudios.registree.api.holder.DeferredBlock;
 import dev.apexstudios.registree.api.holder.DeferredBlockEntity;
 import dev.apexstudios.registree.api.holder.DeferredDataComponent;
