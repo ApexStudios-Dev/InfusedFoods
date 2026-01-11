@@ -30,5 +30,5 @@ dependencies {
     val apexcore = "26.1.10-beta-pr-70"
     implementation("dev.apexstudios:apexcore:$apexcore")
     "dataImplementation"("dev.apexstudios:apexcore:$apexcore")
-    // accessTransformers("dev.apexstudios:apexcore:$apexcore")
+    accessTransformers("dev.apexstudios:apexcore:$apexcore")
 }
