@@ -1,29 +1,17 @@
-import dev.apexstudios.gradle.single.ApexSingleExtension
-
 plugins {
-    id("apex-conventions.neoforge") version "0.1.88"
-    id("apex-conventions.maven-publishing") version "0.1.88"
-    id("apex-conventions.jspecify") version "0.1.88"
+    id("apex-conventions.neoforge")
+    id("apex-conventions.neoforge-datagen")
+    id("apex-conventions.maven-publishing")
+    id("apex-conventions.jspecify")
 }
 
 group = "dev.apexstudios"
-
-apex.neoVersion("26.1.0.0-alpha.5+snapshot-2")
-apex.extendCompilerErrors()
-
-val single = ApexSingleExtension.getOrCreate(project)
-single.withDataGen()
+neoForge.version = "26.1.0.0-alpha.5+snapshot-2"
 
 repositories {
     maven("https://maven.apexstudios.dev/prs/Registree/pr17") {
         content {
             includeModule("dev.apexstudios", "registree")
-        }
-    }
-
-    maven("https://maven.apexstudios.dev/prs/Placement-Visualizer/pr19") {
-        content {
-            includeModule("dev.apexstudios", "placementvisualizer")
         }
     }
 
@@ -35,10 +23,12 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.registree)
-    "dataImplementation"(libs.registree)
+    val registree = "26.1.8-beta-pr-17"
+    implementation("dev.apexstudios:registree:$registree")
+    "dataImplementation"("dev.apexstudios:registree:$registree")
 
-    implementation(libs.apexcore)
-    accessTransformers(libs.apexcore)
-    "dataImplementation"(libs.apexcore)
+    val apexcore = "26.1.10-beta-pr-70"
+    implementation("dev.apexstudios:apexcore:$apexcore")
+    "dataImplementation"("dev.apexstudios:apexcore:$apexcore")
+    // accessTransformers("dev.apexstudios:apexcore:$apexcore")
 }
