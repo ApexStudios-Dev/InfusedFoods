@@ -5,7 +5,6 @@ import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import dev.apexstudios.infusedfoods.common.util.InfusionTags;
 import dev.apexstudios.infusedfoods.common.util.InfusionUtil;
 import dev.apexstudios.registree.common.SimpleRecipeSerializer;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -49,7 +48,7 @@ public final class CleansingRecipe extends CustomRecipe {
     }
 
     @Override
-    public ItemStack assemble(CraftingInput input, HolderLookup.Provider registries) {
+    public ItemStack assemble(CraftingInput input) {
         var cleansingAgent = ItemStack.EMPTY;
         var food = ItemStack.EMPTY;
 
