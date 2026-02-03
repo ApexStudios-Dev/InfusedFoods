@@ -52,7 +52,7 @@ public final class InfusedFoodsDataEntryPoint {
                 )
                 .providing(ProviderTypes.MODELS, (context, provider) -> createPotionCauldron(provider.blockModels()))
                 .providing(ProviderTypes.RECIPES, (context, provider) -> SpecialRecipeBuilder
-                        .special(CleansingRecipe::new)
+                        .special(() -> CleansingRecipe.INSTANCE)
                         .save(provider.output(), InfusedFoods.id("cleansing"))
                 ));
     }
