@@ -16,13 +16,13 @@ repositories {
         }
     }
 
-    maven("https://maven.apexstudios.dev/prs/Registree/pr17") {
+    maven("https://maven.apexstudios.dev/prs/Registree/pr19") {
         content {
             includeModule("dev.apexstudios", "registree")
         }
     }
 
-    maven("https://maven.apexstudios.dev/prs/ApexCore-Private/pr70") {
+    maven("https://maven.apexstudios.dev/prs/ApexCore-Private/pr77") {
         content {
             includeModule("dev.apexstudios", "apexcore")
         }
