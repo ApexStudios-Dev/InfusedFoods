@@ -3,8 +3,10 @@ package dev.apexstudios.infusedfoods.common.cauldron;
 import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import dev.apexstudios.infusedfoods.common.util.InfusionUtil;
+import dev.apexstudios.infusedfoods.mixin.CauldronInterationDispatcherAccessor;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.core.cauldron.CauldronInteractions;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -18,29 +20,26 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 public interface PotionCauldronInteractions {
-    CauldronInteraction.InteractionMap INTERACTIONS = CauldronInteraction.newInteractionMap(InfusedFoods.id("potion_cauldron"));
+    CauldronInteraction.Dispatcher INTERACTIONS = CauldronInteractions.newDispatcher(InfusedFoods.id("potion_cauldron"));
 
     static void registerInteractions() {
         // Empty Cauldron
-        var map = CauldronInteraction.EMPTY.map();
-
-        map.put(Items.POTION, any(InteractionResult.TRY_WITH_EMPTY_HAND,
+        var vanillaWaterBottleInteraction = ((CauldronInterationDispatcherAccessor) CauldronInteractions.EMPTY).InfusedFoods$getItems().getOrDefault(Items.POTION, CauldronInteraction.DEFAULT);
+        CauldronInteractions.EMPTY.put(Items.POTION, any(InteractionResult.TRY_WITH_EMPTY_HAND,
                 // vanilla (Water Bottle -> Water Cauldron)
-                PotionCauldronInteractions::waterBottle2WaterCauldron,
+                vanillaWaterBottleInteraction,
                 // ours (Potion -> Potion Cauldron)
                 PotionCauldronInteractions::cauldron2PotionCauldron
         ));
 
         // Potion Cauldron
-        map = INTERACTIONS.map();
-        map.put(Items.POTION, PotionCauldronInteractions::fromPotion);
-        map.put(Items.GLASS_BOTTLE, PotionCauldronInteractions::toPotion);
+        INTERACTIONS.put(Items.POTION, PotionCauldronInteractions::fromPotion);
+        INTERACTIONS.put(Items.GLASS_BOTTLE, PotionCauldronInteractions::toPotion);
     }
 
     private static InteractionResult cauldron2PotionCauldron(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
@@ -53,24 +52,6 @@ public interface PotionCauldronInteractions {
             level.setBlockAndUpdate(pos, InfusionEntries.CAULDRON_BLOCK.value().defaultBlockState());
             ((PotionCauldronBlockEntity) level.getBlockEntity(pos)).setPotionContents(contents);
             level.playSound(null, pos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1F, 1F);
-            level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
-
-            return InteractionResult.SUCCESS;
-        }
-
-        return InteractionResult.PASS;
-    }
-
-    private static InteractionResult waterBottle2WaterCauldron(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
-        var contents = stack.get(DataComponents.POTION_CONTENTS);
-
-        if(contents != null && contents.is(Potions.WATER)) {
-            var item = stack.getItem();
-            player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
-            player.awardStat(Stats.USE_CAULDRON);
-            player.awardStat(Stats.ITEM_USED.get(item));
-            level.setBlockAndUpdate(pos, Blocks.WATER_CAULDRON.defaultBlockState());
-            level.playSound(null, pos, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 1F, 1F);
             level.gameEvent(null, GameEvent.FLUID_PLACE, pos);
 
             return InteractionResult.SUCCESS;

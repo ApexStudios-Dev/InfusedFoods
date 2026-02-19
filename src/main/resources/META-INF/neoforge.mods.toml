@@ -34,7 +34,7 @@ versionRange = "[26.1-beta,26.2)"
 modrinth = "xl3myxch"
 curseforge = "550778"
 
-#[[accessTransformers]]
-#    file="META-INF/accesstransformer.cfg"
-#[[mixins]]
-#    config="META-INF/infusedfoods.mixins.json"
+[[accessTransformers]]
+    file="META-INF/accesstransformer.cfg"
+[[mixins]]
+    config="META-INF/infusedfoods.mixins.json"
