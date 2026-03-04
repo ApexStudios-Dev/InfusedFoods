@@ -3,9 +3,14 @@ package dev.apexstudios.infusedfoods.client;
 import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlockEntity;
 import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
+import java.util.List;
+import net.minecraft.client.color.block.BlockTintSource;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -19,12 +24,17 @@ import org.jspecify.annotations.Nullable;
 @Mod(value = InfusedFoods.ID, dist = Dist.CLIENT)
 public final class InfusedFoodsClient {
     public InfusedFoodsClient(IEventBus modBus) {
-        modBus.addListener(RegisterColorHandlersEvent.Block.class, event -> event.register((blockState, level, pos, tintIndex) -> {
-            if(level == null || pos == null || !(level.getBlockEntity(pos) instanceof PotionCauldronBlockEntity blockEntity))
+        modBus.addListener(RegisterColorHandlersEvent.BlockTintSources.class, event -> event.register(List.of(new BlockTintSource() {
+            @Override
+            public int color(BlockState blockState) {
                 return PotionContents.BASE_POTION_COLOR;
+            }
 
-            return blockEntity.getPotionContents().getColor();
-        }, InfusionEntries.CAULDRON_BLOCK.value()));
+            @Override
+            public int colorInWorld(BlockState blockState, BlockAndTintGetter level, BlockPos pos) {
+                return level.getBlockEntity(pos) instanceof PotionCauldronBlockEntity blockEntity ? blockEntity.getPotionContents().getColor() : color(blockState);
+            }
+        }), InfusionEntries.CAULDRON_BLOCK.value()));
 
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> event.registerFluidType(new IClientFluidTypeExtensions() {
             @Override
