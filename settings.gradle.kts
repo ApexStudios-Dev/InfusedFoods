@@ -1,13 +1,13 @@
 pluginManagement {
     repositories {
-        maven("https://maven.apexstudios.dev/proxy")
+        maven("https://maven.apexmodder.com/proxy")
         gradlePluginPortal()
     }
 
     resolutionStrategy {
         eachPlugin {
             if(requested.id.namespace == "apex-conventions") {
-                useVersion("0.1.91")
+                useVersion("0.1.94")
             }
         }
     }
