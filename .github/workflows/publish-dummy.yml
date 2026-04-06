@@ -20,3 +20,4 @@ jobs:
       artifact-id: infusedfoods
       display-name: InfusedFoods
       use-self-runner: false
+      build-task: ':build'
