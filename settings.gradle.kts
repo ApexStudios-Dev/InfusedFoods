@@ -1,13 +1,17 @@
 pluginManagement {
     repositories {
-        maven("https://maven.apexmodder.com/proxy")
         gradlePluginPortal()
+        maven("https://maven.apexmodder.com/releases")
     }
 
-    resolutionStrategy {
-        eachPlugin {
-            if(requested.id.namespace == "apex-conventions") {
-                useVersion("0.1.94")
+    if(file("../../ApexGradle").exists()) {
+        includeBuild("../../ApexGradle")
+    } else {
+        resolutionStrategy {
+            eachPlugin {
+                if(requested.id.namespace == "apex-conventions") {
+                    useVersion("0.1.94")
+                }
             }
         }
     }
@@ -15,16 +19,32 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        version("neoforge", "26.1.0.1-beta")
+        version("neoforge", "26.1.0.7-beta")
 
         library("registree", "dev.apexstudios", "registree").version("26.1.0")
-        library("apexcore", "dev.apexstudios", "apexcore").version("26.1.0")
+        library("apexcore", "dev.apexstudios", "apexcore").version("26.1.1")
         bundle("apexcore", listOf("registree", "apexcore"))
     }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
+listOf(
+    "Registree",
+    "ApexCore"
+).forEach { lib ->
+    if(file("../../${lib}/26.1").exists()) {
+        includeBuild("../../${lib}/26.1") {
+            name = lib
+
+            dependencySubstitution {
+                substitute(module("dev.apexstudios:${lib.lowercase()}"))
+                    .using(project(":"))
+            }
+        }
+    }
 }
 
 rootProject.name = "InfusedFoods"

@@ -8,20 +8,6 @@ plugins {
 group = "dev.apexstudios"
 neoForge.version = libs.versions.neoforge.get()
 
-repositories {
-    maven("https://maven.apexmodder.com/prs/Registree/pr17") {
-        content {
-            includeModule("dev.apexstudios", "registree")
-        }
-    }
-
-    maven("https://maven.apexmodder.com/prs/ApexCore-Private/pr70") {
-        content {
-            includeModule("dev.apexstudios", "apexcore")
-        }
-    }
-}
-
 dependencies {
     implementation(libs.bundles.apexcore)
     "dataImplementation"(libs.bundles.apexcore)
