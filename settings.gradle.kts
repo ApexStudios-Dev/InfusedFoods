@@ -19,10 +19,10 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        version("neoforge", "26.1.0.7-beta")
+        version("neoforge", "26.1.2.42-beta")
 
         library("registree", "dev.apexstudios", "registree").version("26.1.0")
-        library("apexcore", "dev.apexstudios", "apexcore").version("26.1.1")
+        library("apexcore", "dev.apexstudios", "apexcore").version("26.1.2")
         bundle("apexcore", listOf("registree", "apexcore"))
     }
 }
