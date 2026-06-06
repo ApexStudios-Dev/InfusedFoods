@@ -14,25 +14,25 @@ displayURL = "https://modrinth.com/mod/infused-foods"
 [[dependencies.infusedfoods]]
 modId = "minecraft"
 type = "required"
-versionRange = "[26.1,26.2)"
+versionRange = "[26.2,26.3)"
 ordering = "NONE"
 side = "BOTH"
 [[dependencies.infusedfoods]]
 modId = "neoforge"
 type = "required"
-versionRange = "[26.1,26.2)"
+versionRange = "[26.2-alpha,26.3)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.infusedfoods]]
 modId = "apexcore"
 type = "required"
-versionRange = "[26.1,26.2)"
+versionRange = "[26.2,26.3)"
 [dependencies.infusedfoods.mc-publish]
 modrinth = "xl3myxch"
 curseforge = "550778"
 
 [[accessTransformers]]
-    file="META-INF/accesstransformer.cfg"
+file="META-INF/accesstransformer.cfg"
 [[mixins]]
-    config="META-INF/infusedfoods.mixins.json"
+config="META-INF/infusedfoods.mixins.json"

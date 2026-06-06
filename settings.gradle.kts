@@ -19,32 +19,16 @@ pluginManagement {
 
 dependencyResolutionManagement {
     versionCatalogs.create("libs") {
-        version("neoforge", "26.1.2.42-beta")
+        version("neoforge", "26.2.0.0-beta")
 
-        library("registree", "dev.apexstudios", "registree").version("26.1.0")
-        library("apexcore", "dev.apexstudios", "apexcore").version("26.1.2")
+        library("registree", "dev.apexstudios", "registree").version("26.2.0")
+        library("apexcore", "dev.apexstudios", "apexcore").version("26.2.0")
         bundle("apexcore", listOf("registree", "apexcore"))
     }
 }
 
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-}
-
-listOf(
-    "Registree",
-    "ApexCore"
-).forEach { lib ->
-    if(file("../../${lib}/26.1").exists()) {
-        includeBuild("../../${lib}/26.1") {
-            name = lib
-
-            dependencySubstitution {
-                substitute(module("dev.apexstudios:${lib.lowercase()}"))
-                    .using(project(":"))
-            }
-        }
-    }
 }
 
 rootProject.name = "InfusedFoods"
