@@ -2,6 +2,9 @@
   "pack": {
     "description": "InfusedFoods",
     "max_format": 107,
-    "min_format": 107
+    "min_format": [
+      107,
+      1
+    ]
   }
 }
