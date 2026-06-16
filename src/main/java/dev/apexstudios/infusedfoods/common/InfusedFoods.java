@@ -2,7 +2,7 @@ package dev.apexstudios.infusedfoods.common;
 
 import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronInteractions;
 import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
-import dev.apexstudios.registree.api.Registree;
+import dev.apexstudios.registree.Registree;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.neoforged.bus.api.IEventBus;
@@ -19,7 +19,7 @@ public final class InfusedFoods {
     public InfusedFoods(IEventBus modBus) {
         InfusionEntries.register();
 
-        REGISTREE.registerEvents(modBus);
+        REGISTREE.register(modBus);
 
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(PotionCauldronInteractions::registerInteractions));
         modBus.addListener(RegisterCauldronFluidContentEvent.class, event -> event.register(InfusionEntries.CAULDRON_BLOCK.value(), InfusionEntries.POTION_FLUID.value(), FluidType.BUCKET_VOLUME, LayeredCauldronBlock.LEVEL));

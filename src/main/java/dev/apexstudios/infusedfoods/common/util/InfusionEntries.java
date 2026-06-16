@@ -5,35 +5,45 @@ import dev.apexstudios.infusedfoods.common.CleansingRecipe;
 import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlock;
 import dev.apexstudios.infusedfoods.common.cauldron.PotionCauldronBlockEntity;
-import dev.apexstudios.registree.api.holder.DeferredBlock;
-import dev.apexstudios.registree.api.holder.DeferredBlockEntity;
-import dev.apexstudios.registree.api.holder.DeferredDataComponent;
-import dev.apexstudios.registree.api.holder.DeferredFluid;
-import dev.apexstudios.registree.api.holder.DeferredFluidType;
-import dev.apexstudios.registree.api.holder.DeferredRecipeSerializer;
-import net.minecraft.network.codec.StreamCodec;
+import dev.apexstudios.registree.holder.DeferredBlockEntity;
+import dev.apexstudios.registree.holder.DeferredDataComponent;
+import dev.apexstudios.registree.holder.DeferredFluid;
+import dev.apexstudios.registree.holder.DeferredFluidType;
+import dev.apexstudios.registree.holder.DeferredRecipeSerializer;
+import dev.apexstudios.registree.holder.Holders;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredBlock;
 
 public interface InfusionEntries {
-    DeferredRecipeSerializer<CleansingRecipe> CLEANSING_RECIPE = InfusedFoods.REGISTREE.registerRecipeSerializer("cleansing", CleansingRecipe.CODEC, CleansingRecipe.STREAM_CODEC);
-    DeferredDataComponent<Unit> HIDE_EFFECTS_COMPONENT = InfusedFoods.REGISTREE.registerDataComponent("hide_effects", Unit.CODEC, StreamCodec.unit(Unit.INSTANCE));
+    DeferredRecipeSerializer<CleansingRecipe> CLEANSING_RECIPE = InfusedFoods.REGISTREE.recipeSerializer("cleansing", CleansingRecipe.CODEC, CleansingRecipe.STREAM_CODEC);
 
-    DeferredFluidType<FluidType> POTION_FLUID_TYPE = InfusedFoods.REGISTREE.registerSimpleFluidType("potion");
-    DeferredFluid<Fluid> POTION_FLUID = InfusedFoods.REGISTREE.registerFluid("potion", ItemOnlyFluid.simpleFactory(POTION_FLUID_TYPE, Items.POTION));
-
-    DeferredBlock<PotionCauldronBlock> CAULDRON_BLOCK = InfusedFoods.REGISTREE.registerBlock("potion_cauldron", PotionCauldronBlock::new, BlockBehaviour.Properties.of()
-            .mapColor(MapColor.STONE)
-            .requiresCorrectToolForDrops()
-            .strength(2F)
-            .noOcclusion()
+    DeferredDataComponent<Unit> HIDE_EFFECTS_COMPONENT = InfusedFoods.REGISTREE.dataComponent("hide_effects", properties -> properties
+            .persistent(Unit.CODEC)
+            .networkSynchronized(Unit.STREAM_CODEC)
     );
 
-    DeferredBlockEntity<PotionCauldronBlockEntity> CAULDRON_BLOCK_ENTITY = InfusedFoods.REGISTREE.registerBlockEntity("potion_cauldron", PotionCauldronBlockEntity::new, CAULDRON_BLOCK);
+    DeferredFluidType<FluidType> POTION_FLUID_TYPE = InfusedFoods.REGISTREE.fluidType("potion").register();
+
+    DeferredFluid<Fluid> POTION_FLUID = InfusedFoods.REGISTREE.fluid("potion", ItemOnlyFluid.simpleFactory(POTION_FLUID_TYPE, Items.POTION))
+            .model(() -> () -> InfusionClientEntries.FLUID_MODEL)
+            .register();
+
+    DeferredBlock<PotionCauldronBlock> CAULDRON_BLOCK = InfusedFoods.REGISTREE.block("potion_cauldron", PotionCauldronBlock::new)
+            .properties(properties -> properties
+                    .mapColor(MapColor.STONE)
+                    .requiresCorrectToolForDrops()
+                    .strength(2F)
+                    .noOcclusion()
+            )
+            .tintSources(() -> () -> InfusionClientEntries.BLOCK_TINT_SOURCES)
+            .blockEntity(PotionCauldronBlockEntity::new)
+            .register();
+
+    DeferredBlockEntity<PotionCauldronBlockEntity> CAULDRON_BLOCK_ENTITY = Holders.createBlockEntity(CAULDRON_BLOCK);
 
     static void register() { }
 }

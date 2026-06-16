@@ -1,5 +1,6 @@
 package dev.apexstudios.infusedfoods.common.cauldron;
 
+import dev.apexstudios.apexcore.api.block.BlockHelper;
 import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ColorParticleOption;
@@ -34,7 +35,7 @@ public final class PotionCauldronBlock extends LayeredCauldronBlock implements E
 
     @Override
     public void animateTick(BlockState blockState, Level level, BlockPos pos, RandomSource random) {
-        var blockEntity = InfusionEntries.CAULDRON_BLOCK_ENTITY.get(level, pos);
+        var blockEntity = BlockHelper.getBlockEntity(level, pos, InfusionEntries.CAULDRON_BLOCK_ENTITY);
 
         if(blockEntity == null)
             return;
