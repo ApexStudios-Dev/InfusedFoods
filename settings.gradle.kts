@@ -21,8 +21,8 @@ dependencyResolutionManagement {
     versionCatalogs.create("libs") {
         version("neoforge", "26.2.0.0-beta")
 
-        library("registree", "dev.apexstudios", "registree").version("26.2.1-beta-pr-89")
-        library("apexcore", "dev.apexstudios", "apexcore").version("26.2.3-beta-pr-30")
+        library("registree", "dev.apexstudios", "registree").version("26.2.3-beta-pr-30")
+        library("apexcore", "dev.apexstudios", "apexcore").version("26.2.1-beta-pr-89")
         bundle("apexcore", listOf("registree", "apexcore"))
     }
 }
