@@ -1,5 +1,6 @@
 package dev.apexstudios.infusedfoods.common.cauldron;
 
+import dev.apexstudios.apexcore.api.block.BlockHelper;
 import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import dev.apexstudios.infusedfoods.common.util.InfusionEntries;
 import dev.apexstudios.infusedfoods.common.util.InfusionUtil;
@@ -71,7 +72,7 @@ public interface PotionCauldronInteractions {
     }
 
     private static InteractionResult toPotion(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
-        var contents = InfusionEntries.CAULDRON_BLOCK_ENTITY.get(level, pos).getPotionContents();
+        var contents = BlockHelper.getBlockEntityOrThrow(level, pos, InfusionEntries.CAULDRON_BLOCK_ENTITY).getPotionContents();
         var fluidLevel = blockState.getValue(LayeredCauldronBlock.LEVEL);
 
         if(fluidLevel >= LayeredCauldronBlock.MIN_FILL_LEVEL && setPotionContents(level, pos, contents, false, true, hand, player, stack))
@@ -82,7 +83,7 @@ public interface PotionCauldronInteractions {
 
     static InteractionResult potionCauldron2Food(BlockState blockState, Level level, BlockPos pos, Player player, InteractionHand hand, ItemStack stack) {
         if(InfusionUtil.isValidFood(stack) && !stack.has(DataComponents.POTION_CONTENTS)) {
-            var blockEntity = InfusionEntries.CAULDRON_BLOCK_ENTITY.get(level, pos);
+            var blockEntity = BlockHelper.getBlockEntityOrThrow(level, pos, InfusionEntries.CAULDRON_BLOCK_ENTITY);
             var contents = blockEntity.getPotionContents();
             var filled = stack.copyWithCount(1);
             filled.set(DataComponents.POTION_CONTENTS, contents);
@@ -112,7 +113,7 @@ public interface PotionCauldronInteractions {
 
     private static boolean setPotionContents(Level level, BlockPos pos, PotionContents newContents, boolean increment, boolean sounds, InteractionHand hand, Player player, ItemStack stack) {
         var blockState = level.getBlockState(pos);
-        var blockEntity = InfusionEntries.CAULDRON_BLOCK_ENTITY.get(level, pos);
+        var blockEntity = BlockHelper.getBlockEntityOrThrow(level, pos, InfusionEntries.CAULDRON_BLOCK_ENTITY);
         var current = blockEntity.getPotionContents();
 
         var itemHasPotion = newContents == PotionContents.EMPTY || newContents.hasEffects();
