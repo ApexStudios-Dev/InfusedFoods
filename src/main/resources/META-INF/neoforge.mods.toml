@@ -8,7 +8,8 @@ displayName = "InfusedFoods"
 credits = "Apex - Programming, Fantasy - Artist"
 authors = "ApexStudios"
 description = "Infused Foods allows players to infuse food items with Potion Effects."
-logoFile = "logo.png"
+bannerFile = "banner.png"
+iconFile = "icon.png"
 displayURL = "https://modrinth.com/mod/infused-foods"
 
 [[dependencies.infusedfoods]]
