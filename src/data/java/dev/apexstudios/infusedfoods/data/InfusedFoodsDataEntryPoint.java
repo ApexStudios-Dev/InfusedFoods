@@ -1,10 +1,11 @@
 package dev.apexstudios.infusedfoods.data;
 
+import dev.apexstudios.apexcore.api.util.ApexUtil;
 import dev.apexstudios.infusedfoods.common.InfusedFoods;
 import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.data.metadata.PackMetadataGenerator;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -24,7 +25,7 @@ public final class InfusedFoodsDataEntryPoint {
             event.createProvider(IFFluidTagsProvider::new);
             event.createProvider(IFLanguageProvider::new);
             event.createProvider(IFModelsProvider::new);
-            event.createProvider(output -> PackMetadataGenerator.forFeaturePack(output, Component.literal("InfusedFoods resources")));
+            event.createProvider(output -> ApexUtil.createMetadataProvider(output, Component.literal("InfusedFoods resources"), PackType.SERVER_DATA));
         });
     }
 }
