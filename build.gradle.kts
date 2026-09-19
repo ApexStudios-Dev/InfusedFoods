@@ -9,20 +9,20 @@ group = "dev.apexstudios"
 neoForge.version = libs.versions.neoforge.get()
 
 repositories {
-    /*maven("https://prmaven.neoforged.net/NeoForge/pr3198") {
+    /*maven("https://prmaven.neoforged.net/NeoForge/pr3492") {
         content {
             includeModule("net.neoforged", "neoforge")
             includeModule("net.neoforged", "testframework")
         }
     }*/
 
-    /*maven("https://maven.apexmodder.com/prs/Registree/pr29") {
+    /*maven("https://maven.apexmodder.com/prs/Registree/pr37") {
         content {
             includeModule("dev.apexstudios", "registree")
         }
     }*/
 
-    /*maven("https://maven.apexmodder.com/prs/ApexCore/pr88") {
+    /*maven("https://maven.apexmodder.com/prs/ApexCore/pr96") {
         content {
             includeModule("dev.apexstudios", "apexcore")
         }
