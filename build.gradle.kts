@@ -22,11 +22,11 @@ repositories {
         }
     }*/
 
-    /*maven("https://maven.apexmodder.com/prs/ApexCore/pr96") {
+    maven("https://maven.apexmodder.com/prs/ApexCore/pr100") {
         content {
             includeModule("dev.apexstudios", "apexcore")
         }
-    }*/
+    }
 }
 
 dependencies {
