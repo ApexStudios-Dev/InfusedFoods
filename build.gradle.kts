@@ -32,5 +32,4 @@ repositories {
 dependencies {
     implementation(libs.bundles.apexcore)
     "dataImplementation"(libs.bundles.apexcore)
-    accessTransformers(libs.apexcore)
 }
