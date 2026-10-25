@@ -16,20 +16,21 @@ repositories {
         }
     }*/
 
-    /*maven("https://maven.apexmodder.com/prs/Registree/pr37") {
+    maven("https://maven.apexmodder.com/prs/Registree/pr41") {
         content {
             includeModule("dev.apexstudios", "registree")
         }
-    }*/
+    }
 
-    /*maven("https://maven.apexmodder.com/prs/ApexCore/pr100") {
+    maven("https://maven.apexmodder.com/prs/ApexCore/pr102") {
         content {
             includeModule("dev.apexstudios", "apexcore")
         }
-    }*/
+    }
 }
 
 dependencies {
     implementation(libs.bundles.apexcore)
     "dataImplementation"(libs.bundles.apexcore)
+    accessTransformers(libs.apexcore)
 }
