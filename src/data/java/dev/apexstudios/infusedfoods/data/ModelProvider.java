@@ -1,7 +1,6 @@
 package dev.apexstudios.infusedfoods.data;
 
 import dev.apexstudios.infusedfoods.api.InfusedFoods;
-import java.util.stream.Stream;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
@@ -9,17 +8,13 @@ import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 
-final class ModelProvider extends net.minecraft.client.data.models.ModelProvider {
+final class ModelProvider extends dev.apexstudios.apexcore.api.data.ModelProvider {
     ModelProvider(PackOutput output) {
-        super(output, InfusedFoods.ID);
+        super(output, InfusedFoods.REGISTREE);
     }
 
     @Override
@@ -51,15 +46,5 @@ final class ModelProvider extends net.minecraft.client.data.models.ModelProvider
                         })
                 )
         );
-    }
-
-    @Override
-    protected Stream<? extends Holder<Block>> getKnownBlocks() {
-        return InfusedFoods.REGISTREE.registrar(Registries.BLOCK).streamHolders();
-    }
-
-    @Override
-    protected Stream<? extends Holder<Item>> getKnownItems() {
-        return Stream.empty();
     }
 }

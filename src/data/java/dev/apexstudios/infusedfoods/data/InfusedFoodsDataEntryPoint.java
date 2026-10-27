@@ -2,10 +2,8 @@ package dev.apexstudios.infusedfoods.data;
 
 import dev.apexstudios.apexcore.api.data.DataGenUtil;
 import dev.apexstudios.infusedfoods.api.InfusedFoods;
-import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
@@ -27,7 +25,7 @@ public final class InfusedFoodsDataEntryPoint {
         });
 
         modBus.addListener(GatherDataRegistryEntriesEvent.class, event -> event
-                .lootTable(new LootTableProvider.SubProviderEntry(BlockLootProvider::new, LootContextParamSets.BLOCK))
+                .lootTable(BlockLootProvider.create(BlockLootProvider::new))
                 .recipe(RecipeProvider::new)
         );
     }
