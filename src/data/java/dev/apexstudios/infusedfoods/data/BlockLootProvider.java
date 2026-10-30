@@ -10,6 +10,6 @@ final class BlockLootProvider extends dev.apexstudios.apexcore.api.data.BlockLoo
 
     @Override
     protected void generate() {
-        dropOther(InfusedFoods.INFUSION_CAULDRON.value(), Blocks.CAULDRON);
+        dropOther(InfusedFoods.POTION_CAULDRON_BLOCK.value(), Blocks.CAULDRON);
     }
 }

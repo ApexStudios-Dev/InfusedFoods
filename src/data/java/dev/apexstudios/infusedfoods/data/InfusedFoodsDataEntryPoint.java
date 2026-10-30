@@ -21,6 +21,7 @@ public final class InfusedFoodsDataEntryPoint {
             event.createProvider(BlockTagProvider::new);
             event.createProvider(ItemTagProvider::new);
             event.createProvider(PotionTagProvider::new);
+            event.createProvider(FluidTagProvider::new);
             event.createProvider(ModelProvider::new);
         });
 

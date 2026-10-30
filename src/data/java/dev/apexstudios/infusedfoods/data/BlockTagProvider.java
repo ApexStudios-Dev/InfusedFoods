@@ -16,6 +16,7 @@ final class BlockTagProvider extends TagsProvider<Block> {
 
     @Override
     protected void addTags(HolderLookup.Provider registries) {
-        tag(BlockTags.CAULDRONS).add(InfusedFoods.INFUSION_CAULDRON.key());
+        tag(BlockTags.CAULDRONS).add(InfusedFoods.POTION_CAULDRON_BLOCK.key());
+        tag(BlockTags.WASHED_AWAY_BY_FLUIDS).add(InfusedFoods.POTION_FLUID_BLOCK.key());
     }
 }

@@ -1,7 +1,6 @@
-package dev.apexstudios.infusedfoods.core;
+package dev.apexstudios.infusedfoods.api;
 
 import com.mojang.serialization.MapCodec;
-import dev.apexstudios.infusedfoods.api.InfusedFoods;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
