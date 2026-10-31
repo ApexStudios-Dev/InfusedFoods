@@ -2,6 +2,7 @@ package dev.apexstudios.infusedfoods.client;
 
 import dev.apexstudios.infusedfoods.api.InfusedFoods;
 import dev.apexstudios.infusedfoods.api.PotionBlockEntity;
+import dev.apexstudios.infusedfoods.api.PotionFluid;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockTintSource;
@@ -41,9 +42,9 @@ public final class InfusedFoodsClientEntryPoint {
 
         modBus.addListener(RegisterFluidModelsEvent.class, event -> event.register(
                 new FluidModel.Unbaked(
-                        new Material(Identifier.withDefaultNamespace("block/water_still")),
-                        new Material(Identifier.withDefaultNamespace("block/water_flow")),
-                        new Material(Identifier.withDefaultNamespace("block/water_overlay")),
+                        new Material(PotionFluid.SOURCE_TEXTURE),
+                        new Material(PotionFluid.FLOWING_TEXTURE),
+                        new Material(PotionFluid.OVERLAY_TEXTURE),
                         fluidTint()
                 ),
                 InfusedFoods.POTION_FLUID,
@@ -51,11 +52,9 @@ public final class InfusedFoodsClientEntryPoint {
         ));
 
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> event.registerFluidType(new IClientFluidTypeExtensions() {
-            private final Identifier UNDERWATER_LOCATION = Identifier.withDefaultNamespace("textures/misc/underwater.png");
-
             @Override
             public Identifier getRenderOverlayTexture(Minecraft mc) {
-                return UNDERWATER_LOCATION;
+                return PotionFluid.UNDERWATER_TEXTURE;
             }
         }, InfusedFoods.POTION_FLUID_TYPE));
     }

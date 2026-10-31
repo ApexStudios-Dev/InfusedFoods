@@ -1,6 +1,7 @@
 package dev.apexstudios.infusedfoods.data;
 
 import dev.apexstudios.infusedfoods.api.InfusedFoods;
+import dev.apexstudios.infusedfoods.api.PotionFluid;
 import java.util.Optional;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
@@ -14,7 +15,6 @@ import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.neoforged.neoforge.client.model.item.DynamicFluidContainerModel;
 import net.neoforged.neoforge.common.NeoForgeMod;
@@ -26,8 +26,6 @@ final class ModelProvider extends dev.apexstudios.apexcore.api.data.ModelProvide
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
-        var textures = TextureMapping.cauldron(TextureMapping.getBlockTexture(Blocks.WATER, "_still"));
-
         blockModels.blockStateOutput.accept(MultiVariantGenerator
                 .dispatch(InfusedFoods.POTION_CAULDRON_BLOCK.value())
                 .with(PropertyDispatch.initial(LayeredCauldronBlock.LEVEL)
@@ -47,15 +45,21 @@ final class ModelProvider extends dev.apexstudios.apexcore.api.data.ModelProvide
                             return BlockModelGenerators.plainVariant(template.createWithSuffix(
                                     InfusedFoods.POTION_CAULDRON_BLOCK.value(),
                                     suffix,
-                                    textures,
+                                    TextureMapping.cauldron(new Material(PotionFluid.SOURCE_TEXTURE)),
                                     blockModels.modelOutput
                             ));
                         })
                 )
         );
 
-        blockModels.createNonTemplateModelBlock(InfusedFoods.POTION_FLUID_BLOCK.value());
-        //itemModels.generateFlatItem(InfusedFoods.POTION_BUCKET.value(), ModelTemplates.FLAT_ITEM);
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(
+                InfusedFoods.POTION_FLUID_BLOCK.value(),
+                BlockModelGenerators.plainVariant(ModelTemplates.PARTICLE_ONLY.create(
+                        InfusedFoods.POTION_FLUID_BLOCK.value(),
+                        TextureMapping.particle(new Material(PotionFluid.SOURCE_TEXTURE)),
+                        blockModels.modelOutput
+                ))
+        ));
 
         itemModels.itemModelOutput.accept(
                 InfusedFoods.POTION_BUCKET.value(),

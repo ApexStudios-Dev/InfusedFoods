@@ -4,6 +4,7 @@ import com.google.common.base.Suppliers;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.InsideBlockEffectApplier;
 import net.minecraft.world.level.Level;
@@ -15,6 +16,11 @@ import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
 public sealed abstract class PotionFluid extends BaseFlowingFluid {
+    public static final Identifier SOURCE_TEXTURE = InfusedFoods.POTION_FLUID.getId().withPath(name -> "block/" + name + "_source");
+    public static final Identifier FLOWING_TEXTURE = InfusedFoods.POTION_FLUID.getId().withPath(name -> "block/" + name + "_flowing");
+    public static final Identifier OVERLAY_TEXTURE = InfusedFoods.POTION_FLUID.getId().withPath(name -> "block/" + name + "_overlay");
+    public static final Identifier UNDERWATER_TEXTURE = InfusedFoods.POTION_FLUID.getId().withPath(name -> "textures/misc/" + name + "_underwater.png");
+
     private static final Supplier<Properties> PROPERTIES = Suppliers.memoize(() -> new Properties(InfusedFoods.POTION_FLUID_TYPE, InfusedFoods.POTION_FLUID, InfusedFoods.FLOWING_POTION_FLUID)
             .block(InfusedFoods.POTION_FLUID_BLOCK)
             .bucket(InfusedFoods.POTION_BUCKET)
