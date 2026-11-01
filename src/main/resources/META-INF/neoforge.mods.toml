@@ -35,5 +35,5 @@ curseforge = "550778"
 
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
-[[mixins]]
-config="META-INF/infusedfoods.mixins.json"
+#[[mixins]]
+#config="META-INF/infusedfoods.mixins.json"
