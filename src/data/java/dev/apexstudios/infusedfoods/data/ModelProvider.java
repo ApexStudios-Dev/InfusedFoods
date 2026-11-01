@@ -70,7 +70,7 @@ final class ModelProvider extends dev.apexstudios.apexcore.api.data.ModelProvide
                                 Optional.of(new Material(Identifier.fromNamespaceAndPath(NeoForgeMod.MOD_ID, "item/mask/bucket_fluid_drip"))),
                                 Optional.empty()
                         ),
-                        InfusedFoods.POTION_FLUID.value(),
+                        InfusedFoods.POTION_FLUID.value(false),
                         false,
                         false,
                         false,

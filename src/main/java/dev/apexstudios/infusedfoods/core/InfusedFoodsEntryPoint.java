@@ -55,7 +55,7 @@ public final class InfusedFoodsEntryPoint {
 
         modBus.addListener(RegisterCauldronFluidContentEvent.class, event -> event.register(
                 InfusedFoods.POTION_CAULDRON_BLOCK.value(),
-                InfusedFoods.POTION_FLUID.value(),
+                InfusedFoods.POTION_FLUID.value(false),
                 FluidType.BUCKET_VOLUME,
                 LayeredCauldronBlock.LEVEL
         ));

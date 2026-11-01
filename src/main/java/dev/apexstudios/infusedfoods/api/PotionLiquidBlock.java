@@ -16,7 +16,7 @@ import org.jspecify.annotations.Nullable;
 
 public final class PotionLiquidBlock extends LiquidBlock implements EntityBlock {
     PotionLiquidBlock(Properties properties) {
-        super(InfusedFoods.POTION_FLUID.value(), properties);
+        super(InfusedFoods.POTION_FLUID.value(false), properties);
     }
 
     @Override

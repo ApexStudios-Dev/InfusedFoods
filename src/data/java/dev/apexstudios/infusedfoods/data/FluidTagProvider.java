@@ -18,8 +18,8 @@ final class FluidTagProvider extends TagsProvider<Fluid> {
     @Override
     protected void addTags(HolderLookup.Provider registries) {
         tag(InfusedFoods.POTION_FLUID_TAG).add(
-                InfusedFoods.POTION_FLUID.key(),
-                InfusedFoods.FLOWING_POTION_FLUID.key()
+                InfusedFoods.POTION_FLUID.key(false),
+                InfusedFoods.POTION_FLUID.key(true)
         );
 
         tag(FluidTags.ENTITY_FLOATABLE).addTag(InfusedFoods.POTION_FLUID_TAG);

@@ -19,7 +19,7 @@ public final class PotionBucketResourcHandler extends ItemAccessResourceHandler<
     @Override
     protected FluidResource getResourceFrom(ItemResource accessResource, int index) {
         if(accessResource.is(InfusedFoods.POTION_BUCKET.value())) {
-            return FluidResource.of(InfusedFoods.POTION_FLUID.value())
+            return FluidResource.of(InfusedFoods.POTION_FLUID.value(false))
                     .with(DataComponents.POTION_CONTENTS, accessResource.get(DataComponents.POTION_CONTENTS));
         }
 

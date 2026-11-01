@@ -47,8 +47,8 @@ public final class InfusedFoodsClientEntryPoint {
                         new Material(PotionFluid.OVERLAY_TEXTURE),
                         fluidTint()
                 ),
-                InfusedFoods.POTION_FLUID,
-                InfusedFoods.FLOWING_POTION_FLUID
+                InfusedFoods.POTION_FLUID.source(),
+                InfusedFoods.POTION_FLUID.flowing()
         ));
 
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> event.registerFluidType(new IClientFluidTypeExtensions() {

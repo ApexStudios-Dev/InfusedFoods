@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
 
 public final class PotionCauldronBlock extends LayeredCauldronBlock implements EntityBlock {
     PotionCauldronBlock(Properties properties) {
@@ -35,5 +36,10 @@ public final class PotionCauldronBlock extends LayeredCauldronBlock implements E
         if(level.getBlockEntity(pos) instanceof PotionBlockEntity blockEntity) {
             blockEntity.applyTo(entity);
         }
+    }
+
+    @Override
+    protected boolean canReceiveStalactiteDrip(Fluid fluid) {
+        return false;
     }
 }

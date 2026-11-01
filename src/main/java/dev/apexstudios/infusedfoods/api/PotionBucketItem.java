@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 
 public final class PotionBucketItem extends BucketItem {
     PotionBucketItem(Properties properties) {
-        super(InfusedFoods.POTION_FLUID.value(), properties);
+        super(InfusedFoods.POTION_FLUID.value(false), properties);
     }
 
     @Override
